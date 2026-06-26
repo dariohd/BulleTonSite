@@ -1,0 +1,109 @@
+/* ── Thème clair (défaut) — lisible, rassurant ── */
+:root,
+[data-theme='mineral'] {
+  --black: #f2f5f9;
+  --bg: #ffffff;
+  --bg-mid: #e8eef5;
+  --bg-card: #ffffff;
+  --cream: #3a4555;
+  --white: #1a2433;
+  --muted: #5a6678;
+  --accent: #1e5a9e;
+  --accent-rgb: 30, 90, 158;
+  --accent-light: #2b6cb8;
+  --accent-deep: #164a85;
+  --border: #d4dde8;
+  --border-strong: #b8c5d6;
+}
+
+/* Autres palettes (claires) — conservées pour compatibilité */
+[data-theme='corail'] {
+  --black: #faf7f5;
+  --bg: #ffffff;
+  --bg-mid: #f5efe9;
+  --bg-card: #ffffff;
+  --cream: #3d3835;
+  --white: #2a2420;
+  --muted: #6b6560;
+  --accent: #c45d44;
+  --accent-rgb: 196, 93, 68;
+  --accent-light: #d97a62;
+  --accent-deep: #a84a35;
+  --border: #e8ddd8;
+  --border-strong: #d4c4bc;
+}
+
+[data-theme='sage'] {
+  --black: #f5f7f5;
+  --bg: #ffffff;
+  --bg-mid: #eaf0eb;
+  --bg-card: #ffffff;
+  --cream: #3a423c;
+  --white: #222a24;
+  --muted: #5f6b62;
+  --accent: #5d8a6a;
+  --accent-rgb: 93, 138, 106;
+  --accent-light: #75a382;
+  --accent-deep: #4a7058;
+  --border: #d8e4da;
+  --border-strong: #bccfbf;
+}
+
+[data-theme='acier'] {
+  --black: #f3f6fa;
+  --bg: #ffffff;
+  --bg-mid: #e6edf5;
+  --bg-card: #ffffff;
+  --cream: #384252;
+  --white: #1c2838;
+  --muted: #5a6678;
+  --accent: #3b7bc4;
+  --accent-rgb: 59, 123, 196;
+  --accent-light: #5590d4;
+  --accent-deep: #2d65a8;
+  --border: #d0ddea;
+  --border-strong: #b5c5d8;
+}
+
+[data-theme='terracotta'] {
+  --black: #faf8f5;
+  --bg: #ffffff;
+  --bg-mid: #f3ebe4;
+  --bg-card: #ffffff;
+  --cream: #453a34;
+  --white: #2e241e;
+  --muted: #6e6258;
+  --accent: #b86a48;
+  --accent-rgb: 184, 106, 72;
+  --accent-light: #d0825e;
+  --accent-deep: #9a5538;
+  --border: #e8ddd4;
+  --border-strong: #d4c4b8;
+}
+
+[data-theme='ardoise'] {
+  --black: #f4f7f8;
+  --bg: #ffffff;
+  --bg-mid: #e6f0ee;
+  --bg-card: #ffffff;
+  --cream: #384442;
+  --white: #1e2a28;
+  --muted: #5a6864;
+  --accent: #3d9a7a;
+  --accent-rgb: 61, 154, 122;
+  --accent-light: #52b090;
+  --accent-deep: #2f7d62;
+  --border: #d4e6e0;
+  --border-strong: #b8d4ca;
+}
+
+:root,
+[data-theme] {
+  --grad-accent: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 55%, var(--accent-deep) 100%);
+  --grad-ring: linear-gradient(
+    145deg,
+    rgba(var(--accent-rgb), 0.35),
+    rgba(var(--accent-rgb), 0.06) 45%,
+    rgba(var(--accent-rgb), 0.18)
+  );
+}

@@ -1,0 +1,2 @@
+/*
+  Content-Security-Policy: frame-ancestors 'self' https://VOTRE-DOMAINE.fr http://localhost:3000

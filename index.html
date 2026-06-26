@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html lang="fr" data-theme="mineral">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="description" content="Hugo Davion — création de sites web sur mesure pour artisans, chambres d'hôtes et entreprises locales. Devis gratuit." />
+
+  <title>Hugo Davion — Création de sites web</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="themes.css" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+</head>
+
+<body data-theme="mineral">
+
+  <header class="header" id="header">
+
+    <div class="header__inner">
+
+      <a class="logo" href="#">
+
+        <span class="logo__name" data-brand="name"></span>
+
+        <span class="logo__by" data-brand="byline"></span>
+
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Navigation principale"></nav>
+
+      <a class="btn btn--sm header__cta" href="#contact" data-hero="ctaPrimary"></a>
+
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Menu" aria-expanded="false">
+
+        <span></span><span></span>
+
+      </button>
+
+    </div>
+
+  </header>
+
+
+
+  <main>
+
+    <section class="hero" id="hero">
+
+      <div class="hero__bg" aria-hidden="true">
+
+        <div class="hero__gradient"></div>
+
+      </div>
+
+
+
+      <div class="hero__inner">
+
+        <div class="hero__content">
+
+          <p class="hero__eyebrow" data-hero="eyebrow"></p>
+
+          <h1 class="hero__title">
+
+            <span data-hero="title"></span>
+
+            <em data-hero="titleEm"></em>
+
+          </h1>
+
+          <p class="hero__lead" data-hero="lead"></p>
+
+          <div class="hero__actions">
+
+            <a class="btn" href="#contact" data-hero="ctaPrimary"></a>
+
+            <a class="btn btn--ghost" href="#projets" data-hero="ctaSecondary"></a>
+
+          </div>
+
+          <div class="hero__stats" id="hero-stats"></div>
+
+        </div>
+
+
+
+        <div class="hero__stage" id="hero-stage">
+
+          <div class="hero__stack" id="hero-stack"></div>
+
+          <p class="hero__stage-label" id="hero-stage-label"></p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track" id="marquee"></div>
+    </div>
+
+    <div class="trust-bar" id="trust-bar"></div>
+
+    <section class="section" id="services">
+
+      <div class="container">
+
+        <header class="section__head reveal">
+
+          <p class="eyebrow">Services</p>
+
+          <h2 class="section__title">Ce que vous <em>obtenez</em></h2>
+
+        </header>
+
+        <div class="grid grid--services" id="services-grid"></div>
+
+      </div>
+
+    </section>
+
+
+
+    <section class="section section--alt" id="projets">
+
+      <div class="container">
+
+        <header class="section__head reveal">
+
+          <p class="eyebrow">Réalisations</p>
+
+          <h2 class="section__title">Ils m'ont fait <em>confiance</em></h2>
+
+          <p class="showcase__hint reveal">Exemples de sites livrés · explorez chaque aperçu</p>
+
+        </header>
+
+      </div>
+
+      <div class="showcase" id="showcase">
+
+        <button type="button" class="showcase__btn showcase__btn--prev" id="showcase-prev" aria-label="Projet précédent">
+
+          <span aria-hidden="true">‹</span>
+
+        </button>
+
+        <div class="showcase__track" id="projects-track" tabindex="0" aria-label="Carrousel des réalisations"></div>
+
+        <button type="button" class="showcase__btn showcase__btn--next" id="showcase-next" aria-label="Projet suivant">
+
+          <span aria-hidden="true">›</span>
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+
+    <section class="section" id="process">
+
+      <div class="container">
+
+        <header class="section__head reveal">
+
+          <p class="eyebrow">Méthode</p>
+
+          <h2 class="section__title" data-process="title"></h2>
+
+        </header>
+
+        <ol class="timeline" id="timeline"></ol>
+
+      </div>
+
+    </section>
+
+
+
+    <section class="section section--pricing" id="tarifs">
+
+      <div class="container">
+
+        <header class="section__head reveal">
+
+          <p class="eyebrow">Tarifs</p>
+
+          <h2 class="section__title" data-pricing="title"></h2>
+
+          <p class="section__sub reveal" data-pricing="note"></p>
+
+        </header>
+
+        <p class="price-from reveal">
+
+          À partir de <strong id="price-from"></strong>
+
+        </p>
+
+        <div class="grid grid--pricing" id="pricing-grid"></div>
+
+        <ul class="footnotes reveal" id="pricing-footnotes"></ul>
+
+      </div>
+
+    </section>
+
+
+
+    <section class="section section--promo" id="promo"></section>
+
+
+
+    <section class="section" id="about">
+
+      <div class="container about">
+
+        <div class="about__portrait reveal">
+
+          <img data-contact="photo" alt="" width="200" height="200" />
+
+        </div>
+
+        <div class="about__text reveal reveal--d1">
+
+          <p class="eyebrow">À propos</p>
+
+          <h2 class="section__title" data-about="title"></h2>
+
+          <p class="about__p" data-about="text"></p>
+
+          <ul class="about__list" id="about-list"></ul>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <section class="section section--cta" id="contact">
+
+      <div class="container">
+
+        <div class="cta-card reveal">
+
+          <p class="eyebrow">Contact</p>
+
+          <h2 class="cta-card__title">Un devis gratuit <em>sous 24 h</em></h2>
+
+          <p class="cta-card__sub">Devis gratuit · Sans engagement</p>
+
+          <p class="cta-card__response" data-contact="response"></p>
+
+          <div class="cta-card__links">
+
+            <a class="btn" href="#" data-contact="email-link">Envoyer un e-mail</a>
+
+            <a class="btn btn--ghost" href="#" data-contact="phone-link"></a>
+
+          </div>
+
+          <p class="cta-card__zone" data-contact="zone"></p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+  <footer class="footer">
+
+    <div class="container footer__inner">
+
+      <p class="footer__brand"><span data-brand="name"></span> — <span data-brand="byline"></span></p>
+
+      <p class="footer__tag" data-brand="tagline"></p>
+
+      <p class="footer__copy">© <span id="footer-year"></span> Hugo Davion</p>
+
+    </div>
+
+  </footer>
+
+
+
+  <script type="module" src="hero-effects.js"></script>
+
+  <script type="module" src="main.js"></script>
+
+</body>
+
+</html>
+
+

@@ -1,0 +1,25 @@
+Miniatures interactives — autoriser le portfolio en iframe
+========================================================
+
+1. Déployez votre portfolio (dossier Site/) et notez l'URL finale.
+   Exemple : https://etabli-web.fr
+
+2. Mettez à jour Site/config.js :
+   portfolio.url = 'https://etabli-web.fr'
+
+3. Sur CHAQUE site client (Ela, Quai, ETCBC, SQCDP…) :
+   - Vercel : copiez vercel.json à la racine du projet
+   - Netlify : copiez netlify-headers vers public/_headers
+
+4. Remplacez VOTRE-DOMAINE.fr par votre URL portfolio (sans slash final).
+
+5. Redéployez le site client → la miniature du portfolio sera cliquable.
+
+Fichiers par projet (même contenu, à copier au bon repo) :
+  - maison-ela      → lamaisondela.com
+  - quai-des-reves  → quai-des-reves.vercel.app
+  - etcbc           → etcbc-charpente.com
+  - sqcdp           → sqcdp.vercel.app
+
+Tant que l'en-tête n'est pas déployé, le portfolio affiche une capture
+de secours automatiquement.
