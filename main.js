@@ -15,6 +15,7 @@ import {
   team,
   guarantees,
   promo,
+  comparison,
   faq,
   legal,
   seo,
@@ -520,6 +521,40 @@ function initPromo() {
     </div>`;
 }
 
+function initComparison() {
+  const title = document.getElementById('compare-title');
+  const sub = document.getElementById('compare-sub');
+  const table = document.getElementById('compare-table');
+  const disclaimer = document.getElementById('compare-disclaimer');
+  if (!table) return;
+
+  if (title) title.innerHTML = comparison.title.replace('accompagné', '<em>accompagné</em>');
+  if (sub) sub.textContent = comparison.subtitle;
+  if (disclaimer) disclaimer.textContent = comparison.disclaimer;
+
+  const head = `
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">${comparison.them.label}<span>${comparison.them.hint}</span></th>
+        <th scope="col" class="compare__us">${comparison.us.label}<span>${comparison.us.hint}</span></th>
+      </tr>
+    </thead>`;
+
+  const body = comparison.rows
+    .map(
+      (row) => `
+      <tr>
+        <th scope="row">${row.label}</th>
+        <td>${row.them}</td>
+        <td class="compare__us">${row.us}</td>
+      </tr>`,
+    )
+    .join('');
+
+  table.innerHTML = head + `<tbody>${body}</tbody>`;
+}
+
 function initPricing() {
   setText('[data-pricing]', 'pricing', pricing);
   const fromEl = document.getElementById('price-from');
@@ -667,6 +702,7 @@ initServiceSpotlight();
 initProjects();
 initTestimonials();
 initProcess();
+initComparison();
 initPricing();
 initPromo();
 initAbout();

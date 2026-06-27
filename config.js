@@ -13,7 +13,7 @@ export const themes = [
 export const defaultTheme = 'mineral';
 
 export const portfolio = {
-  url: 'https://bulleweb.vercel.app',
+  url: 'https://bulletonsite.vercel.app',
   localUrl: 'http://localhost:3000',
 };
 
@@ -45,7 +45,7 @@ export const guarantees = [
 
 export const contact = {
   name: 'Hugo',
-  email: 'davionhugo@gmail.com',
+  email: 'bulletonsite@gmail.com',
   phone: '06 13 80 95 65',
   phoneTel: '+33613809565',
   zone: 'Partout en France · 100 % à distance',
@@ -244,6 +244,59 @@ export const pricing = {
     'Devis gratuit · Sans engagement',
     'Pas de frais cachés',
     'Paiement en 2 fois : acompte, solde à la livraison',
+  ],
+};
+
+export const comparison = {
+  title: 'Faire soi-même ou être accompagné ?',
+  subtitle:
+    'IONOS, Wix et les autres constructeurs en ligne conviennent si vous avez le temps de tout gérer. Nous, on conçoit un site à votre image — avec une équipe qui vous guide.',
+  disclaimer:
+    'Comparaison indicative à titre informatif, sans valeur contractuelle. Offres et tarifs des plateformes tierces susceptibles d\'évoluer.',
+  them: {
+    label: 'Constructeurs en ligne',
+    hint: 'IONOS, Wix, Squarespace…',
+  },
+  us: {
+    label: 'Bulle ton site',
+    hint: 'Création sur mesure',
+  },
+  rows: [
+    {
+      label: 'Design',
+      them: 'Modèles prêts à l\'emploi, look souvent générique',
+      us: 'Design pensé pour votre métier et votre image',
+    },
+    {
+      label: 'Personnalisation',
+      them: 'Limitée aux options du modèle',
+      us: 'Contenus, structure et visuels adaptés à vous',
+    },
+    {
+      label: 'Accompagnement',
+      them: 'Vous avancez seul, aide surtout technique',
+      us: 'Équipe dédiée, échanges simples sans jargon',
+    },
+    {
+      label: 'Mises à jour',
+      them: 'À faire vous-même dans l\'outil',
+      us: 'Vous nous envoyez vos changements, on s\'en occupe',
+    },
+    {
+      label: 'Temps à y consacrer',
+      them: 'Plusieurs heures (voire jours) de prise en main',
+      us: 'Quelques échanges : brief, retours, validation',
+    },
+    {
+      label: 'Coût',
+      them: 'Abonnement mensuel fréquent + options',
+      us: 'Devis unique · pas d\'abonnement obligatoire',
+    },
+    {
+      label: 'Résultat',
+      them: 'Site fonctionnel, peu différenciant',
+      us: 'Site soigné, crédible face à vos clients',
+    },
   ],
 };
 
