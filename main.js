@@ -377,7 +377,9 @@ function unloadBrowserIframe(browser) {
 
 function panelHtml(p, realIndex, slideIndex, clone = '') {
   const typeLabel =
-    p.category === 'sur-mesure' ? '<p class="showcase__type">Outil sur mesure</p>' : '';
+    p.category === 'sur-mesure'
+      ? '<p class="showcase__type">Outil sur mesure</p>'
+      : '<p class="showcase__type showcase__type--empty" aria-hidden="true"></p>';
   const results =
     p.results?.length > 0
       ? `<ul class="showcase__results">${p.results.map((r) => `<li>${r}</li>`).join('')}</ul>`
@@ -748,7 +750,7 @@ function initPricing() {
 
   const hostingEl = document.getElementById('pricing-hosting');
   if (hostingEl && pricing.hosting) {
-    hostingEl.innerHTML = `<strong>${pricing.hosting.label}</strong> — ${pricing.hosting.detail}`;
+    hostingEl.innerHTML = `<strong>${pricing.hosting.label} d'hébergement</strong><span>${pricing.hosting.detail}</span>`;
   }
 }
 

@@ -50,7 +50,7 @@ export const seo = {
 export const guarantees = [
   'Devis gratuit sous 24 h',
   'Paiement en 2 fois',
-  '1ʳᵉ année d\'hébergement incluse',
+  'Hébergement 5 €/mois',
   'Équipe dédiée',
 ];
 
@@ -238,11 +238,11 @@ export const process = {
 export const pricing = {
   title: 'Des tarifs transparents',
   from: 450,
-  note: 'Fourchettes indicatives · Chaque projet fait l\'objet d\'un devis personnalisé · 1ʳᵉ année d\'hébergement incluse',
+  note: 'Fourchettes indicatives · Chaque projet fait l\'objet d\'un devis personnalisé',
   hosting: {
     price: 5,
     label: '5 €/mois',
-    detail: 'Hébergement dès la 2ᵉ année (1ʳᵉ année incluse dans le devis)',
+    detail: 'Serveur, HTTPS et mise en ligne — nom de domaine en option (~12 €/an)',
   },
   example: {
     label: 'Exemple — chambre d\'hôtes',
@@ -276,7 +276,7 @@ export const pricing = {
   footnotes: [
     'Devis gratuit · Sans engagement',
     'Pas de frais cachés',
-    '1ʳᵉ année d\'hébergement incluse · puis 5 €/mois',
+    'Hébergement : 5 €/mois (HTTPS inclus)',
     'Paiement en 2 fois : acompte, solde à la livraison',
   ],
 };
@@ -345,15 +345,15 @@ export const faq = [
   },
   {
     q: 'Que comprend l\'hébergement ?',
-    a: 'Mise en ligne, certificat HTTPS et hébergement sur une infrastructure fiable. La 1ʳᵉ année est incluse dans votre devis ; ensuite, comptez 5 €/mois (nom de domaine en option). Pas de frais cachés.',
+    a: '5 €/mois pour garder votre site en ligne : serveur, certificat HTTPS (cadenas) et maintenance de base. Le nom de domaine (votrenom.fr) est en option, environ 10–15 €/an. Tout est détaillé dans votre devis, sans frais cachés.',
   },
   {
-    q: 'Que comprennent les 5 €/mois d\'hébergement ?',
-    a: 'La mise en ligne de votre site, le certificat HTTPS (cadenas), les mises à jour de sécurité serveur et la surveillance de base. Ce n\'est pas un abonnement « site builder » : votre site reste le vôtre. Le nom de domaine (votrenom.fr) est en option, environ 10–15 €/an selon l\'extension.',
+    q: 'Que comprennent les 5 €/mois ?',
+    a: 'La mise en ligne, le HTTPS, l\'espace serveur et la surveillance technique. Ce n\'est pas un abonnement « site builder » type Wix : votre site vous appartient, nous gérons l\'infra pour vous.',
   },
   {
     q: 'Le nom de domaine est-il inclus ?',
-    a: 'L\'hébergement oui la 1ʳᵉ année. Le nom de domaine (adresse .fr ou .com) peut être acheté pour vous en option — comptez environ 10–15 €/an, sans marge cachée.',
+    a: 'Non, il n\'est pas inclus dans les 5 €/mois. Nous pouvons l\'acheter et le configurer pour vous — comptez environ 10–15 €/an selon l\'extension (.fr, .com…), sans marge cachée.',
   },
   {
     q: 'Travaillez-vous avec mon métier ?',
