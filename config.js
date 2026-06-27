@@ -43,7 +43,7 @@ export const brand = {
 export const seo = {
   title: 'Bulle ton site — Création de sites web sur mesure',
   description:
-    'Sites web et outils sur mesure : communication, design et développement réunis. Artisans, gîtes, commerces. Dès 450 € · devis gratuit sous 24 h.',
+    'Sites web et outils sur mesure : communication, création d\'identité visuelle et développement réunis. Artisans, gîtes, commerces. Dès 450 € · devis gratuit sous 24 h.',
   ogImage: 'assets/og-bubble.svg',
 };
 
@@ -86,11 +86,11 @@ export const nav = [
 ];
 
 export const hero = {
-  eyebrow: 'Design · code · mise en ligne',
+  eyebrow: 'Identité visuelle · communication · développement',
   title: 'Votre site internet,',
   titleEm: 'conçu en équipe.',
   lead:
-    'Communication, branding et développement réunis : vitrines, réservations, outils métier — nous créons ce dont vous avez besoin. Un interlocuteur par métier, du brief au prototype en quelques jours.',
+    'Communication, création d\'identité visuelle et développement réunis : vitrines, réservations, outils métier — nous créons ce dont vous avez besoin. Un interlocuteur par métier, du brief au prototype en quelques jours.',
   chips: ['Équipe dédiée', 'Prototype en 2–3 jours', 'Mobile & Google'],
   ctaPrimary: 'Demander un devis gratuit',
   ctaSecondary: 'Voir nos réalisations',
@@ -110,6 +110,11 @@ export const sectors = [
 ];
 
 export const services = [
+  {
+    icon: '✓',
+    title: 'Identité visuelle',
+    text: 'Logo, couleurs, typographie : une image claire et cohérente que vos clients reconnaissent tout de suite.',
+  },
   {
     icon: '✓',
     title: 'Site qui rassure',
@@ -224,7 +229,7 @@ export const process = {
       num: '02',
       title: 'Prototype & identité visuelle',
       text: 'Première maquette et direction graphique en 2–3 jours. Vous validez avant le développement final.',
-      who: 'Niyazi · Branding & graphisme',
+      who: 'Niyazi · Identité visuelle & graphisme',
     },
     {
       num: '03',
@@ -384,12 +389,12 @@ export const organization = {
 export const team = [
   { name: 'Audrey Jurado', role: 'Communication · Relationnel', photo: 'assets/audrey-jurado.png' },
   { name: 'Hugo Davion', role: 'Développeur web', photo: 'assets/hugo-portrait.png' },
-  { name: 'Niyazi Azaiez', role: 'Branding · Graphiste', photo: 'assets/niyazi-azaiez.png' },
+  { name: 'Niyazi Azaiez', role: 'Identité visuelle · Graphiste', photo: 'assets/niyazi-azaiez.png' },
 ];
 
 export const about = {
   title: "L'équipe",
-  text: 'Audrey (communication), Niyazi (branding & graphisme) et Hugo (développement) : trois métiers complémentaires pour un site cohérent de A à Z.',
+  text: 'Audrey (communication), Niyazi (identité visuelle & graphisme) et Hugo (développement) : trois métiers complémentaires pour un site cohérent de A à Z.',
   blurb:
     'Pas de sous-traitance opaque ni d\'interlocuteurs multiples — vous savez qui fait quoi à chaque étape.',
 };
