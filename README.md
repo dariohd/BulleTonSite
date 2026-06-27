@@ -1,11 +1,13 @@
-# Site vitrine
+# La Bulle Web
+
+Site vitrine commercial (artisans, tourisme, commerces locaux).
 
 Le site utilise des modules JavaScript — **ne pas ouvrir `index.html` en double-clic**.
 
 ## Lancer en local
 
 ```bash
-cd Site
+cd BulleWeb
 npm install
 npm start
 ```
@@ -21,4 +23,6 @@ Mettre à jour `config.js` → `portfolio.url` en même temps.
 
 ## Identité
 
-Le site est configuré pour **Hugo Davion** dans `config.js` → `brand`.
+Configuré dans `config.js` → `brand` (**La Bulle Web**).
+
+Repo : [github.com/hhddno/bulleweb](https://github.com/hhddno/bulleweb)

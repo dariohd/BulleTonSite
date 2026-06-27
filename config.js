@@ -1,5 +1,5 @@
 /**
- * Identité — Hugo Davion
+ * Identité — La Bulle Web
  */
 export const themes = [
   { id: 'mineral', label: 'Bleu clair', swatch: '#1e5a9e' },
@@ -17,7 +17,7 @@ export const defaultTheme = 'mineral';
  * Voir embed-templates/ pour les fichiers à copier sur chaque projet.
  */
 export const portfolio = {
-  url: 'https://hugodavion.vercel.app',
+  url: 'https://bulleweb.vercel.app',
   localUrl: 'http://localhost:3000',
 };
 
@@ -27,11 +27,11 @@ export function frameAncestorsDirective() {
 }
 
 export const brand = {
-  name: 'Hugo Davion',
+  name: 'La Bulle Web',
   byline: 'Création de sites web',
   tagline: 'Sites internet sur mesure',
   description:
-    'Hugo Davion crée des sites vitrines pour artisans et entreprises locales : plus de visibilité sur Google, plus de contacts, sans jargon ni surprise sur la facture.',
+    'La Bulle Web crée des sites vitrines pour artisans et entreprises locales : plus de visibilité sur Google, plus de contacts, sans jargon ni surprise sur la facture.',
 };
 
 export const guarantees = [
@@ -42,7 +42,7 @@ export const guarantees = [
 ];
 
 export const contact = {
-  name: 'Hugo Davion',
+  name: 'Hugo',
   email: 'davionhugo@gmail.com',
   phone: '06 13 80 95 65',
   phoneTel: '+33613809565',
@@ -109,7 +109,7 @@ export const projects = [
     name: "La Maison d'Ela",
     sector: 'Chambre d\'hôtes · Dordogne',
     url: 'https://www.lamaisondela.com/',
-    image: 'assets/screenshots/maison-ela-accueil.png',
+    image: './assets/screenshots/maison-ela-accueil.png',
     embed: 'iframe',
     description:
       'Site vitrine pour une chambre d\'hôtes : présentation du lieu, séjours thématiques, galerie et formulaire de réservation par e-mail.',
@@ -121,7 +121,7 @@ export const projects = [
     name: 'Quai des Rêves',
     sector: 'Maison d\'hôtes · Bretagne',
     url: 'https://quai-des-reves.vercel.app/',
-    image: 'assets/screenshots/quai-accueil.png',
+    image: './assets/screenshots/quai-accueil.png',
     embed: 'iframe',
     description:
       'Histoire de l\'ancienne gare, chambres, carte du GR37 — et un formulaire pour demander une nuitée en direct.',
@@ -133,7 +133,7 @@ export const projects = [
     name: 'ETCBC Charpente',
     sector: 'Charpente & construction bois',
     url: 'https://www.etcbc-charpente.com/',
-    image: 'assets/screenshots/etcbc-accueil.png',
+    image: './assets/screenshots/etcbc-accueil.png',
     embed: 'iframe',
     description:
       'Site vitrine pour l\'entreprise : métiers, zone d\'intervention, galerie de chantiers filtrable et demande de devis.',
@@ -212,8 +212,8 @@ export const promo = {
 };
 
 export const about = {
-  title: 'Hugo Davion',
-  text: 'Je crée des sites pour des artisans, gîtes et commerces qui veulent être trouvés sur Google et rassurer leurs clients dès la première visite. Pas d\'agence, pas de sous-traitance : vous parlez à la personne qui fait le travail.',
+  title: 'La Bulle Web',
+  text: 'Je crée des sites pour des artisans, gîtes et commerces qui veulent être trouvés sur Google et rassurer leurs clients dès la première visite. Pas d\'agence opaque : vous parlez à la personne qui conçoit et développe votre site.',
   bullets: [
     'Échanges simples, sans jargon technique',
     'Sites adaptés aux smartphones (la majorité de vos visiteurs)',

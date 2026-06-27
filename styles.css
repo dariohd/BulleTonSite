@@ -25,6 +25,21 @@ body {
   overflow-x: hidden;
 }
 
+.site-bubbles {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.72;
+}
+
+.header,
+main,
+.footer {
+  position: relative;
+  z-index: 1;
+}
+
 img { max-width: 100%; display: block; }
 
 a { color: inherit; }
@@ -74,6 +89,19 @@ a { color: inherit; }
   font-size: 1.15rem;
   font-weight: 600;
   color: var(--white);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.logo__name::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff, var(--accent));
+  box-shadow: 0 0 8px rgba(30, 90, 158, 0.35);
+  flex-shrink: 0;
 }
 
 .logo__by {
@@ -707,6 +735,12 @@ body.is-loaded .hero__stage {
   box-shadow: 0 12px 40px rgba(26, 36, 51, 0.1);
 }
 
+.showcase__panel > .mini-browser {
+  min-height: 0;
+  width: 100%;
+  align-self: stretch;
+}
+
 .showcase__sector {
   font-size: 0.72rem;
   font-weight: 600;
@@ -829,10 +863,10 @@ body.is-loaded .hero__stage {
   flex: 1;
   overflow: auto;
   overscroll-behavior: contain;
-  background: #e8ecf1;
+  background: #fff;
   cursor: grab;
-  min-height: 0;
-  padding: 12px;
+  min-height: 320px;
+  padding: 0;
 }
 
 .mini-browser__viewport.is-dragging {
@@ -844,26 +878,21 @@ body.is-loaded .hero__stage {
   flex-shrink: 0;
   overflow: hidden;
   position: relative;
-  margin: 0 auto;
-  box-shadow: 0 4px 20px rgba(26, 36, 51, 0.12);
+  margin: 0;
   background: #fff;
+}
+
+.mini-browser__frame {
+  overflow: hidden;
+  transform-origin: top left;
 }
 
 .mini-browser__scale iframe,
 .mini-browser__scale .mini-browser__fallback-img {
-  width: var(--mini-w);
-  height: var(--mini-h);
   border: 0;
   display: block;
-  transform: scale(var(--mini-scale));
-  transform-origin: top left;
   pointer-events: auto;
   background: #fff;
-}
-
-.mini-browser__scale .mini-browser__fallback-img {
-  object-fit: cover;
-  object-position: top center;
 }
 
 .mini-browser.is-blocked .mini-browser__iframe { display: none; }
@@ -1085,6 +1114,7 @@ body.is-loaded .hero__stage {
   padding: 3px;
   background: var(--grad-ring);
   flex-shrink: 0;
+  overflow: hidden;
 }
 
 .about__portrait img {
@@ -1093,6 +1123,8 @@ body.is-loaded .hero__stage {
   border-radius: 50%;
   object-fit: cover;
   object-position: 28% 45%;
+  display: block;
+  background: var(--bg-mid);
 }
 
 .about__p {

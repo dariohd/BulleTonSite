@@ -14,15 +14,12 @@ import {
   themes,
   defaultTheme,
 } from './config.js';
-import { fitMiniBrowser, observeMiniBrowser } from './mini-browser.js';
-
-function resolveAsset(path) {
-  if (!path || /^(https?:|data:|blob:|file:)/i.test(path)) return path;
-  return new URL(path, import.meta.url).href;
-}
+import { fitMiniBrowser, observeMiniBrowser, resolveAsset } from './mini-browser.js';
+import { initBubbles } from './bubbles.js';
 
 function setText(sel, key, obj) {
   document.querySelectorAll(sel).forEach((el) => {
+    if (el.tagName === 'IMG') return;
     const k = el.dataset[key];
     if (k && obj[k] != null) el.textContent = obj[k];
   });
@@ -40,6 +37,15 @@ function initContact() {
   document.querySelectorAll('[data-contact="photo"]').forEach((img) => {
     img.src = resolveAsset(contact.photo);
     img.alt = `${contact.name} — ${brand.tagline}`;
+    img.addEventListener(
+      'error',
+      () => {
+        if (!img.src.endsWith('/assets/hugo-portrait.png')) {
+          img.src = '/assets/hugo-portrait.png';
+        }
+      },
+      { once: true }
+    );
   });
   const emailLink = document.querySelector('[data-contact="email-link"]');
   if (emailLink) {
@@ -239,12 +245,31 @@ function initShowcase() {
     setupEmbed(browser, projects[idx]);
     const vp = browser.querySelector('.mini-browser__viewport');
     setupMiniViewportDrag(vp);
-    fitMiniBrowser(browser);
     observeMiniBrowser(browser);
-    browser.querySelector('iframe')?.addEventListener('load', () => fitMiniBrowser(browser));
+    browser.querySelector('iframe')?.addEventListener('load', () => {
+      fitMiniBrowser(browser);
+      setTimeout(() => fitMiniBrowser(browser), 150);
+    });
   });
 
+  const refitAll = () => track.querySelectorAll('.mini-browser').forEach(fitMiniBrowser);
+
   const panels = () => [...track.querySelectorAll('.showcase__panel')];
+
+  const visibilityObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.mini-browser').forEach((b) => {
+            fitMiniBrowser(b);
+            setTimeout(() => fitMiniBrowser(b), 120);
+          });
+        }
+      });
+    },
+    { threshold: 0.35 }
+  );
+  panels().forEach((p) => visibilityObserver.observe(p));
 
   const getRealIndex = () => {
     const center = track.scrollLeft + track.clientWidth / 2;
@@ -284,6 +309,8 @@ function initShowcase() {
   requestAnimationFrame(() => {
     scrollToRealIndex(0, false);
     updateActive();
+    refitAll();
+    setTimeout(refitAll, 250);
   });
 
   track.addEventListener(
@@ -307,7 +334,7 @@ function initShowcase() {
 
   window.addEventListener('resize', () => {
     scrollToRealIndex(getRealIndex(), false);
-    track.querySelectorAll('.mini-browser').forEach(fitMiniBrowser);
+    refitAll();
   });
 
   document.getElementById('showcase-prev')?.addEventListener('click', () => {
@@ -534,3 +561,4 @@ initAbout();
 initFooter();
 initScrollReveal();
 initHeader();
+initBubbles();

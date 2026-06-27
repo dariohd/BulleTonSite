@@ -1,5 +1,5 @@
 {
-  "name": "site-vitrine",
+  "name": "bulleweb",
   "private": true,
   "scripts": {
     "start": "serve . -l 3000",

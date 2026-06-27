@@ -1,10 +1,5 @@
 import { projects } from './config.js';
-import { fitHeroStack } from './mini-browser.js';
-
-function resolveAsset(path) {
-  if (!path || /^(https?:|data:|blob:|file:)/i.test(path)) return path;
-  return new URL(path, import.meta.url).href;
-}
+import { fitHeroStack, resolveAsset } from './mini-browser.js';
 
 function domainFrom(url) {
   try {
