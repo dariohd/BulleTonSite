@@ -14,12 +14,23 @@ export const defaultTheme = 'mineral';
 
 export const portfolio = {
   url: 'https://bulletonsite.vercel.app',
+  domain: 'https://bulletonsite.com',
   localUrl: 'http://localhost:3000',
+  /** Domaines autorisés à afficher ce site en iframe (portfolio + préprod locale). */
+  frameAncestors: [
+    'https://bulletonsite.vercel.app',
+    'https://bulletonsite.com',
+    'https://www.bulletonsite.com',
+    'http://localhost:3000',
+  ],
 };
 
 export function frameAncestorsDirective() {
-  return `'self' ${portfolio.url} ${portfolio.localUrl}`;
+  return `'self' ${portfolio.frameAncestors.join(' ')}`;
 }
+
+/** Valeur CSP à copier dans vercel.json / _headers des sites clients. */
+export const clientEmbedCsp = `frame-ancestors 'self' ${portfolio.frameAncestors.join(' ')}`;
 
 export const brand = {
   name: 'Bulle ton site',

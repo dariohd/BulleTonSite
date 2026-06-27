@@ -1267,6 +1267,7 @@ body.is-loaded .hero__stage {
 .compare__us {
   background: color-mix(in srgb, var(--bg-card) 88%, rgba(var(--purple-rgb), 0.1));
   border-left: 2px solid rgba(var(--accent-rgb), 0.35);
+  border-right: 1px solid rgba(var(--accent-rgb), 0.2);
 }
 
 .compare thead .compare__us {
@@ -2137,6 +2138,21 @@ body.is-loaded .hero__stage {
   .grid--pricing {
     grid-template-columns: 1fr;
     max-width: 24rem;
+  }
+
+  .compare tbody th[scope='row'] {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background: var(--bg-card);
+    box-shadow: 4px 0 8px rgba(26, 36, 51, 0.04);
+  }
+
+  .compare thead th:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 3;
+    background: var(--bg-mid);
   }
 }
 

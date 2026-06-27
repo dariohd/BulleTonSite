@@ -1,2 +1,2 @@
 /*
-  Content-Security-Policy: frame-ancestors 'self' https://VOTRE-DOMAINE.fr http://localhost:3000
+  Content-Security-Policy: frame-ancestors 'self' https://bulletonsite.vercel.app https://bulletonsite.com https://www.bulletonsite.com http://localhost:3000

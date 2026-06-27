@@ -1,25 +1,36 @@
-Miniatures interactives — autoriser le portfolio en iframe
-========================================================
+Autoriser l'aperçu iframe sur bulletonsite.com
+==============================================
 
-1. Déployez votre portfolio (dossier BulleWeb/) et notez l'URL finale.
-   Exemple : https://bulletonsite.vercel.app
+Le portfolio affiche vos sites dans des mini-navigateurs (carrousel Réalisations).
+Par défaut, beaucoup de sites refusent d'être encadrés → capture de secours à la place.
 
-2. Mettez à jour BulleWeb/config.js :
-   portfolio.url = 'https://bulletonsite.vercel.app'
+QUI FAIT QUOI
+-------------
+• Sur CHAQUE site client (Ela, Quai, ETCBC, SQCDP…) :
+  ajouter l'en-tête CSP frame-ancestors qui autorise bulletonsite.
 
-3. Sur CHAQUE site client (Ela, Quai, ETCBC, SQCDP…) :
-   - Vercel : copiez vercel.json à la racine du projet
-   - Netlify : copiez netlify-headers vers public/_headers
+• Sur le portfolio (BulleWeb) :
+  rien de bloquant côté sortie — les sites clients doivent autoriser l'embed.
 
-4. Remplacez VOTRE-DOMAINE.fr par votre URL portfolio (sans slash final).
+• bulletonsite.com :
+  même config Vercel que bulletonsite.vercel.app (domaine custom dans Vercel → Settings → Domains).
 
-5. Redéployez le site client → la miniature du portfolio sera cliquable.
+EN-TÊTE À DÉPLOYER SUR LES SITES CLIENTS
+----------------------------------------
+frame-ancestors 'self' https://bulletonsite.vercel.app https://bulletonsite.com https://www.bulletonsite.com http://localhost:3000
 
-Fichiers par projet (même contenu, à copier au bon repo) :
-  - maison-ela      → lamaisondela.com
-  - quai-des-reves  → quai-des-reves.vercel.app
-  - etcbc           → etcbc-charpente.com
-  - sqcdp           → sqcdp.vercel.app
+Vercel : copier embed-templates/vercel.json à la racine du projet client.
+Netlify : copier embed-templates/netlify-headers vers public/_headers
 
-Tant que l'en-tête n'est pas déployé, le portfolio affiche une capture
-de secours automatiquement.
+Si le site a déjà une CSP, fusionner frame-ancestors (ne pas écraser toute la politique).
+
+FICHIERS PAR PROJET
+-------------------
+  maison-ela      → lamaisondela.com
+  quai-des-reves  → quai-des-reves.vercel.app
+  etcbc           → etcbc-charpente.com
+  sqcdp           → sqcdp.vercel.app
+
+Prompts prêts à coller : voir PROMPTS.md dans ce dossier.
+
+Après déploiement du client : vider le cache navigateur ou attendre 1–2 min, puis recharger bulletonsite.com#projets.

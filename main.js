@@ -536,8 +536,8 @@ function initComparison() {
     <thead>
       <tr>
         <th scope="col"></th>
-        <th scope="col">${comparison.them.label}<span>${comparison.them.hint}</span></th>
         <th scope="col" class="compare__us">${comparison.us.label}<span>${comparison.us.hint}</span></th>
+        <th scope="col">${comparison.them.label}<span>${comparison.them.hint}</span></th>
       </tr>
     </thead>`;
 
@@ -546,8 +546,8 @@ function initComparison() {
       (row) => `
       <tr>
         <th scope="row">${row.label}</th>
-        <td>${row.them}</td>
         <td class="compare__us">${row.us}</td>
+        <td>${row.them}</td>
       </tr>`,
     )
     .join('');
