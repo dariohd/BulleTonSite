@@ -1,6 +1,10 @@
 {
   "name": "bulletonsite",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dariohd/BulleTonSite.git"
+  },
   "scripts": {
     "start": "serve . -l 3000",
     "dev": "serve . -l 3000"

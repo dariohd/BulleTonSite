@@ -31,4 +31,4 @@ Mettre à jour `config.js` → `portfolio.url` en même temps.
 
 Configuré dans `config.js` → `brand` (**Bulle ton site**).
 
-Repo : [github.com/dariohd/bulletonsite](https://github.com/dariohd/bulletonsite)
+Repo : [github.com/dariohd/BulleTonSite](https://github.com/dariohd/BulleTonSite)
