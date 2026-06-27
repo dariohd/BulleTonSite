@@ -290,12 +290,12 @@ export const pricing = {
 export const comparison = {
   title: 'Faire soi-même ou être accompagné ?',
   subtitle:
-    'IONOS, Wix et les autres constructeurs en ligne conviennent si vous avez le temps de tout gérer. Nous, on conçoit un site à votre image, avec une équipe qui vous guide.',
+    'Les solutions en ligne à faire soi-même conviennent si vous avez le temps de tout gérer. Nous, on conçoit un site à votre image, avec une équipe qui vous guide.',
   disclaimer:
-    'Comparaison indicative à titre informatif, sans valeur contractuelle. Offres et tarifs des plateformes tierces susceptibles d\'évoluer.',
+    'Comparaison indicative à titre informatif, sans valeur contractuelle. Les situations et besoins varient selon les projets.',
   them: {
-    label: 'Constructeurs en ligne',
-    hint: 'IONOS, Wix, Squarespace…',
+    label: 'Faire soi-même',
+    hint: 'Modèles et outils en ligne',
   },
   us: {
     label: 'Bulle ton site',
