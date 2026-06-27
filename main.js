@@ -21,7 +21,7 @@ import {
   seo,
   portfolio,
 } from './config.js';
-import { fitMiniBrowser, observeMiniBrowser, resolveAsset } from './mini-browser.js';
+import { fitMiniBrowser, observeMiniBrowser, observeShowcaseBrowser, fitShowcaseBrowser, resolveAsset } from './mini-browser.js';
 import { initBubbles } from './bubbles.js';
 
 function setText(sel, key, obj) {
@@ -257,9 +257,15 @@ function initLiveBrowser(browser) {
   browser.dataset.liveReady = 'true';
 
   const fitted = browser.classList.contains('mini-browser--16x9');
-  const vp = browser.querySelector('.mini-browser__viewport');
-  if (fitted) return;
+  if (fitted) {
+    observeShowcaseBrowser(browser);
+    browser.querySelector('.mini-browser__iframe')?.addEventListener('load', () => {
+      fitShowcaseBrowser(browser);
+    });
+    return;
+  }
 
+  const vp = browser.querySelector('.mini-browser__viewport');
   setupMiniViewportDrag(vp);
   observeMiniBrowser(browser);
   const iframe = browser.querySelector('.mini-browser__iframe');
@@ -269,9 +275,9 @@ function initLiveBrowser(browser) {
   });
 }
 
-function panelHtml(p, realIndex) {
+function panelHtml(p, realIndex, slideIndex, clone = '') {
   return `
-    <article class="showcase__panel reveal" data-real-index="${realIndex}">
+    <article class="showcase__panel reveal" data-real-index="${realIndex}" data-slide-index="${slideIndex}"${clone ? ` data-clone="${clone}"` : ''}>
       <div class="showcase__info">
         <p class="showcase__sector">${p.sector}</p>
         <h3>${p.name}</h3>
@@ -283,64 +289,120 @@ function panelHtml(p, realIndex) {
           <a class="btn btn--ghost" href="#contact">Un site comme celui-ci</a>
         </div>
       </div>
-      ${miniBrowserHtml(p)}
+      <div class="showcase__preview">
+        ${miniBrowserHtml(p)}
+      </div>
     </article>`;
 }
 
 function initShowcase(list = projects) {
   const track = document.getElementById('projects-track');
-  if (!track) return;
+  if (!track || list.length === 0) return;
 
-  track.innerHTML = list.map((p, i) => panelHtml(p, i)).join('');
+  const n = list.length;
+  const slides =
+    n > 1
+      ? [
+          { p: list[n - 1], real: n - 1, clone: 'start' },
+          ...list.map((p, i) => ({ p, real: i, clone: '' })),
+          { p: list[0], real: 0, clone: 'end' },
+        ]
+      : list.map((p, i) => ({ p, real: i, clone: '' }));
+
+  track.innerHTML = slides.map((s, i) => panelHtml(s.p, s.real, i, s.clone)).join('');
 
   track.querySelectorAll('.mini-browser').forEach((browser) => initLiveBrowser(browser));
 
   const panels = () => [...track.querySelectorAll('.showcase__panel')];
+  let isJumping = false;
+  let scrollSyncTimer = 0;
+  let lastFocused = -1;
 
-  const activatePanel = (panel) => {
-    const browser = panel?.querySelector('.mini-browser');
-    if (!browser) return;
-    loadBrowserIframe(browser);
+  const getSlidePad = () => {
+    const panel = panels()[0];
+    if (!panel) return 0;
+    return Math.max(0, (track.clientWidth - panel.offsetWidth) / 2);
   };
 
-  const getRealIndex = () => {
+  const setTrackPadding = () => {
+    const pad = getSlidePad();
+    track.style.paddingLeft = `${pad}px`;
+    track.style.paddingRight = `${pad}px`;
+  };
+
+  const getFocusedSlideIndex = () => {
     const center = track.scrollLeft + track.clientWidth / 2;
     let best = 0;
     let bestDist = Infinity;
-    panels().forEach((panel) => {
+    panels().forEach((panel, i) => {
       const panelCenter = panel.offsetLeft + panel.offsetWidth / 2;
       const dist = Math.abs(center - panelCenter);
       if (dist < bestDist) {
         bestDist = dist;
-        best = Number(panel.dataset.realIndex);
+        best = i;
       }
     });
     return best;
   };
 
+  const activatePanel = (panel) => {
+    const browser = panel?.querySelector('.mini-browser');
+    if (!browser) return;
+    loadBrowserIframe(browser);
+    requestAnimationFrame(() => fitShowcaseBrowser(browser));
+  };
+
   const updateActive = () => {
-    const i = getRealIndex();
-    panels().forEach((p) => {
-      const active = Number(p.dataset.realIndex) === i;
-      p.classList.toggle('is-active', active);
-      if (active) activatePanel(p);
-    });
+    const idx = getFocusedSlideIndex();
+    const focused = panels()[idx];
+    if (!focused) return;
+    panels().forEach((p) => p.classList.toggle('is-active', p === focused));
+    if (idx !== lastFocused) {
+      lastFocused = idx;
+      activatePanel(focused);
+    }
   };
 
-  const scrollToRealIndex = (realIndex, smooth = true) => {
-    const target = panels().find((p) => Number(p.dataset.realIndex) === realIndex);
+  const scrollToSlide = (slideIndex, smooth = true) => {
+    const target = panels()[slideIndex];
     if (!target) return;
+    const pad = getSlidePad();
     track.scrollTo({
-      left: target.offsetLeft - (track.clientWidth - target.offsetWidth) / 2,
-      behavior: smooth ? 'smooth' : 'auto',
+      left: target.offsetLeft - pad,
+      behavior: smooth && !isJumping ? 'smooth' : 'auto',
     });
-    setTimeout(updateActive, smooth ? 400 : 0);
+    if (!smooth || isJumping) updateActive();
+    else setTimeout(updateActive, 420);
   };
 
-  requestAnimationFrame(() => {
-    scrollToRealIndex(0, false);
+  const maybeJumpClone = () => {
+    if (n <= 1) return;
+    const focused = panels()[getFocusedSlideIndex()];
+    if (!focused?.dataset.clone) return;
+
+    isJumping = true;
+    if (focused.dataset.clone === 'start') {
+      scrollToSlide(n, false);
+    } else if (focused.dataset.clone === 'end') {
+      scrollToSlide(1, false);
+    }
+    requestAnimationFrame(() => {
+      isJumping = false;
+      lastFocused = -1;
+      updateActive();
+    });
+  };
+
+  const goNext = () => scrollToSlide(getFocusedSlideIndex() + 1);
+  const goPrev = () => scrollToSlide(getFocusedSlideIndex() - 1);
+
+  const initPosition = () => {
+    setTrackPadding();
+    scrollToSlide(n > 1 ? 1 : 0, false);
     updateActive();
-  });
+  };
+
+  requestAnimationFrame(initPosition);
 
   track.addEventListener(
     'wheel',
@@ -360,26 +422,33 @@ function initShowcase(list = projects) {
     { passive: false },
   );
 
-  track.addEventListener('scroll', updateActive, { passive: true });
+  track.addEventListener('scroll', () => {
+    if (!isJumping) updateActive();
+    clearTimeout(scrollSyncTimer);
+    scrollSyncTimer = setTimeout(maybeJumpClone, 140);
+  }, { passive: true });
 
-  window.addEventListener('resize', () => scrollToRealIndex(getRealIndex(), false));
-
-  document.getElementById('showcase-prev')?.addEventListener('click', () => {
-    scrollToRealIndex((getRealIndex() - 1 + list.length) % list.length);
+  window.addEventListener('resize', () => {
+    const idx = getFocusedSlideIndex();
+    setTrackPadding();
+    scrollToSlide(idx, false);
+    panels().forEach((p) => {
+      const browser = p.querySelector('.mini-browser--16x9');
+      if (browser) fitShowcaseBrowser(browser);
+    });
   });
 
-  document.getElementById('showcase-next')?.addEventListener('click', () => {
-    scrollToRealIndex((getRealIndex() + 1) % list.length);
-  });
+  document.getElementById('showcase-prev')?.addEventListener('click', goPrev);
+  document.getElementById('showcase-next')?.addEventListener('click', goNext);
 
   track.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') {
       e.preventDefault();
-      document.getElementById('showcase-prev')?.click();
+      goPrev();
     }
     if (e.key === 'ArrowRight') {
       e.preventDefault();
-      document.getElementById('showcase-next')?.click();
+      goNext();
     }
   });
 }

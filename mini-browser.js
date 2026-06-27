@@ -40,6 +40,35 @@ function ensureFrame(scaleWrap) {
 
 
 
+export function fitShowcaseBrowser(browser) {
+  const vp = browser?.querySelector('.mini-browser__viewport');
+  const scale = browser?.querySelector('.mini-browser__scale');
+  const iframe = browser?.querySelector('.mini-browser__iframe');
+  if (!vp || !scale || !iframe) return;
+
+  const availW = vp.clientWidth;
+  const availH = vp.clientHeight;
+  if (availW < 2 || availH < 2) return;
+
+  const s = Math.min(availW / MINI_W, availH / MINI_H);
+  const scaledW = MINI_W * s;
+  const scaledH = MINI_H * s;
+
+  scale.style.width = `${scaledW}px`;
+  scale.style.height = `${scaledH}px`;
+  iframe.style.width = `${MINI_W}px`;
+  iframe.style.height = `${MINI_H}px`;
+  iframe.style.transform = `scale(${s})`;
+  iframe.style.transformOrigin = 'top left';
+}
+
+export function observeShowcaseBrowser(browser) {
+  const vp = browser?.querySelector('.mini-browser__viewport');
+  if (!vp || typeof ResizeObserver === 'undefined') return;
+  const ro = new ResizeObserver(() => fitShowcaseBrowser(browser));
+  ro.observe(vp);
+}
+
 export function fitMiniBrowser(browser) {
 
   const vp = browser?.querySelector('.mini-browser__viewport');
