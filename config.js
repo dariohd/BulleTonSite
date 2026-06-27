@@ -13,7 +13,7 @@ export const themes = [
 export const defaultTheme = 'mineral';
 
 export const portfolio = {
-  url: 'https://bulletonsite.vercel.app',
+  url: 'https://bulletonsite.com',
   domain: 'https://bulletonsite.com',
   localUrl: 'http://localhost:3000',
   /** Domaines autorisés à afficher ce site en iframe (portfolio + préprod locale). */
@@ -62,6 +62,19 @@ export const contact = {
   zone: 'Partout en France · 100 % à distance',
   response: 'Réponse sous 24 h',
   photo: 'assets/hugo-portrait.png',
+};
+
+/** Formulaire : Web3Forms (recommandé) ou FormSubmit en secours. */
+export const form = {
+  /** Clé gratuite sur https://web3forms.com (e-mail bulletonsite@gmail.com). */
+  web3formsAccessKey: '',
+};
+
+/** Statistiques Plausible — activer après création du site sur plausible.io */
+export const analytics = {
+  enabled: true,
+  domain: 'bulletonsite.com',
+  scriptSrc: 'https://plausible.io/js/script.js',
 };
 
 export const nav = [
@@ -130,6 +143,7 @@ export const projects = [
     description:
       'Site vitrine pour une chambre d\'hôtes : présentation du lieu, séjours thématiques, galerie et formulaire de réservation par e-mail.',
     outcome: 'Les voyageurs réservent en direct, sans commission intermédiaire.',
+    results: ['Livré en 2 semaines', 'Réservations par e-mail', 'Site multilingue'],
     tags: ['Vitrine', 'Réservation', 'Multilingue'],
   },
   {
@@ -142,6 +156,7 @@ export const projects = [
     description:
       'Histoire de l\'ancienne gare, chambres, carte du GR37 — et un formulaire pour demander une nuitée en direct.',
     outcome: 'Une vitrine chaleureuse qui donne envie de réserver sur place.',
+    results: ['Prototype en 3 jours', 'Formulaire nuitées intégré', '100 % à distance'],
     tags: ['Storytelling', 'Réservation'],
   },
   {
@@ -154,6 +169,7 @@ export const projects = [
     description:
       'Site vitrine pour l\'entreprise : métiers, zone d\'intervention, galerie de chantiers filtrable et demande de devis.',
     outcome: 'Des demandes de devis qualifiées, reçues par e-mail.',
+    results: ['Galerie chantiers filtrable', 'Demandes de devis ciblées', 'Mobile optimisé'],
     tags: ['Vitrine', 'Galerie', 'Devis'],
   },
 ];
@@ -169,6 +185,7 @@ export const projectsCustom = [
     description:
       'Application web PWA : tableaux de bord SQCDP animés, PDCA, roulette de réunion et mode hors-ligne pour l\'atelier.',
     outcome: 'Un outil métier sur mesure, utilisable au bureau comme en atelier.',
+    results: ['PWA installable', 'Mode hors-ligne atelier', 'Tableaux SQCDP animés'],
     tags: ['React', 'TypeScript', 'PWA'],
   },
 ];
@@ -329,6 +346,18 @@ export const faq = [
   {
     q: 'Que comprend l\'hébergement ?',
     a: 'Mise en ligne, certificat HTTPS et hébergement sur une infrastructure fiable. La 1ʳᵉ année est incluse dans votre devis ; ensuite, comptez 5 €/mois (nom de domaine en option). Pas de frais cachés.',
+  },
+  {
+    q: 'Que comprennent les 5 €/mois d\'hébergement ?',
+    a: 'La mise en ligne de votre site, le certificat HTTPS (cadenas), les mises à jour de sécurité serveur et la surveillance de base. Ce n\'est pas un abonnement « site builder » : votre site reste le vôtre. Le nom de domaine (votrenom.fr) est en option, environ 10–15 €/an selon l\'extension.',
+  },
+  {
+    q: 'Le nom de domaine est-il inclus ?',
+    a: 'L\'hébergement oui la 1ʳᵉ année. Le nom de domaine (adresse .fr ou .com) peut être acheté pour vous en option — comptez environ 10–15 €/an, sans marge cachée.',
+  },
+  {
+    q: 'Travaillez-vous avec mon métier ?',
+    a: 'Oui : artisans, chambres d\'hôtes, commerces, restaurateurs, professions libérales… Si vous avez un projet particulier (outil interne, réservations, intranet), décrivez-le : on vous dit franchement si on peut vous accompagner.',
   },
   {
     q: 'Travaillez-vous à distance ?',

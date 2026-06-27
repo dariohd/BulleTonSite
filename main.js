@@ -20,6 +20,8 @@ import {
   legal,
   seo,
   portfolio,
+  form,
+  analytics,
 } from './config.js';
 import { fitMiniBrowser, observeMiniBrowser, observeShowcaseBrowser, fitShowcaseBrowser, resolveAsset } from './mini-browser.js';
 import { initBubbles } from './bubbles.js';
@@ -52,13 +54,26 @@ function initSeo() {
   if (ogTitle) ogTitle.content = seo.title;
   if (ogDesc) ogDesc.content = seo.description;
 
+  const siteUrl = portfolio.url.replace(/\/$/, '');
+  const canonical = document.querySelector('link[rel="canonical"]');
+  if (canonical) canonical.href = `${siteUrl}/`;
+
+  const ogUrl = document.querySelector('meta[property="og:url"]');
+  if (ogUrl) ogUrl.content = `${siteUrl}/`;
+
+  const ogImage = document.querySelector('meta[property="og:image"]');
+  if (ogImage) {
+    const imgPath = seo.ogImage.replace(/^\.\//, '');
+    ogImage.content = `${siteUrl}/${imgPath}`;
+  }
+
   const schemaEl = document.getElementById('schema-org');
   if (schemaEl) {
     schemaEl.textContent = JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'Organization',
       name: organization.brand,
-      url: portfolio.url,
+      url: siteUrl,
       description: seo.description,
       email: contact.email,
       telephone: contact.phoneTel,
@@ -66,6 +81,17 @@ function initSeo() {
       sameAs: [],
     });
   }
+}
+
+function initAnalytics() {
+  if (!analytics.enabled || !analytics.domain) return;
+  if (document.querySelector('script[data-plausible]')) return;
+  const s = document.createElement('script');
+  s.defer = true;
+  s.dataset.domain = analytics.domain;
+  s.dataset.plausible = 'true';
+  s.src = analytics.scriptSrc;
+  document.head.appendChild(s);
 }
 
 function initContact() {
@@ -85,35 +111,103 @@ function initContact() {
 }
 
 function initContactForm() {
-  const form = document.getElementById('contact-form');
+  const formEl = document.getElementById('contact-form');
   const status = document.getElementById('contact-form-status');
-  if (!form) return;
+  const submitBtn = formEl?.querySelector('.contact-form__submit');
+  if (!formEl) return;
 
-  form.addEventListener('submit', (e) => {
+  formEl.addEventListener('submit', async (e) => {
     e.preventDefault();
-    if (!form.checkValidity()) {
-      form.reportValidity();
+    if (!formEl.checkValidity()) {
+      formEl.reportValidity();
       return;
     }
-    const data = new FormData(form);
-    const name = data.get('name');
-    const email = data.get('email');
-    const activity = data.get('activity');
-    const need = data.get('need');
-    const budget = data.get('budget');
-    const message = data.get('message') || '—';
 
-    const subject = encodeURIComponent(`Devis Bulle ton site — ${activity}`);
-    const body = encodeURIComponent(
-      `Nom : ${name}\nE-mail : ${email}\nActivité : ${activity}\nBesoin : ${need}\nBudget : ${budget}\n\nMessage :\n${message}`,
-    );
-    window.location.href = `mailto:${contact.email}?subject=${subject}&body=${body}`;
+    const data = new FormData(formEl);
+    const name = String(data.get('name') || '').trim();
+    const email = String(data.get('email') || '').trim();
+    const activity = String(data.get('activity') || '').trim();
+    const need = String(data.get('need') || '').trim();
+    const budget = String(data.get('budget') || '').trim();
+    const message = String(data.get('message') || '—').trim();
 
+    if (data.get('_gotcha')) return;
+
+    const payload = {
+      name,
+      email,
+      activity,
+      need,
+      budget,
+      message,
+      subject: `Devis Bulle ton site — ${activity}`,
+    };
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Envoi en cours…';
+    }
     if (status) {
       status.hidden = false;
-      status.textContent =
-        'Votre client mail va s\'ouvrir avec le message prérempli. Si rien ne s\'affiche, écrivez-nous directement à ' +
-        contact.email;
+      status.classList.remove('contact-form__status--error');
+      status.textContent = 'Envoi de votre demande…';
+    }
+
+    try {
+      let ok = false;
+
+      if (form.web3formsAccessKey) {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: form.web3formsAccessKey,
+            name,
+            email,
+            subject: payload.subject,
+            message: `Activité : ${activity}\nBesoin : ${need}\nBudget : ${budget}\n\nMessage :\n${message}`,
+            from_name: name,
+            replyto: email,
+          }),
+        });
+        const json = await res.json();
+        ok = json.success === true;
+      } else {
+        const res = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(contact.email)}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            name,
+            email,
+            activity,
+            need,
+            budget,
+            message,
+            _subject: payload.subject,
+            _replyto: email,
+            _captcha: 'false',
+          }),
+        });
+        ok = res.ok;
+      }
+
+      if (!ok) throw new Error('submit failed');
+
+      formEl.reset();
+      if (status) {
+        status.textContent =
+          'Message envoyé — nous vous répondons sous 24 h. Pensez à vérifier vos spams.';
+      }
+    } catch {
+      if (status) {
+        status.classList.add('contact-form__status--error');
+        status.textContent = `Envoi impossible pour le moment. Écrivez-nous à ${contact.email} ou appelez le ${contact.phone}.`;
+      }
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Envoyer ma demande';
+      }
     }
   });
 }
@@ -275,13 +369,28 @@ function initLiveBrowser(browser) {
   });
 }
 
+function unloadBrowserIframe(browser) {
+  const iframe = browser?.querySelector('.mini-browser__iframe');
+  if (!iframe?.src) return;
+  iframe.removeAttribute('src');
+}
+
 function panelHtml(p, realIndex, slideIndex, clone = '') {
+  const typeLabel =
+    p.category === 'sur-mesure' ? '<p class="showcase__type">Outil sur mesure</p>' : '';
+  const results =
+    p.results?.length > 0
+      ? `<ul class="showcase__results">${p.results.map((r) => `<li>${r}</li>`).join('')}</ul>`
+      : '';
+
   return `
     <article class="showcase__panel reveal" data-real-index="${realIndex}" data-slide-index="${slideIndex}"${clone ? ` data-clone="${clone}"` : ''}>
       <div class="showcase__info">
         <p class="showcase__sector">${p.sector}</p>
+        ${typeLabel}
         <h3>${p.name}</h3>
         ${p.outcome ? `<p class="showcase__outcome">${p.outcome}</p>` : ''}
+        ${results}
         <p class="showcase__desc">${p.description}</p>
         <div class="showcase__tags">${p.tags.map((t) => `<span>${t}</span>`).join('')}</div>
         <div class="showcase__actions">
@@ -356,7 +465,13 @@ function initShowcase(list = projects) {
     const idx = getFocusedSlideIndex();
     const focused = panels()[idx];
     if (!focused) return;
-    panels().forEach((p) => p.classList.toggle('is-active', p === focused));
+
+    panels().forEach((p) => {
+      const isFocused = p === focused;
+      p.classList.toggle('is-active', isFocused);
+      if (!isFocused) unloadBrowserIframe(p.querySelector('.mini-browser'));
+    });
+
     if (idx !== lastFocused) {
       lastFocused = idx;
       activatePanel(focused);
@@ -458,25 +573,10 @@ function initCustomProjects() {
   if (!el || projectsCustom.length === 0) return;
 
   el.innerHTML = `
-    <div class="custom-projects__head reveal">
-      <h3 class="custom-projects__title">Outils <em>sur mesure</em></h3>
-      <p class="custom-projects__sub">Au-delà des vitrines : applications métier, PWA et outils internes.</p>
-    </div>
-    <div class="custom-projects__grid">
-      ${projectsCustom
-        .map(
-          (p) => `
-        <article class="custom-card reveal">
-          <p class="custom-card__sector">${p.sector}</p>
-          <h4>${p.name}</h4>
-          <p>${p.description}</p>
-          <p class="custom-card__outcome">${p.outcome}</p>
-          <div class="showcase__tags">${p.tags.map((t) => `<span>${t}</span>`).join('')}</div>
-          <a class="btn btn--ghost" href="${p.url}" target="_blank" rel="noopener">Voir le projet →</a>
-        </article>`,
-        )
-        .join('')}
-    </div>`;
+    <p class="custom-projects__note reveal">
+      Le carrousel inclut aussi des <strong>outils sur mesure</strong> — applications métier, PWA et tableaux de bord.
+      Faites défiler jusqu'à <strong>SQCDP</strong> pour un exemple interactif.
+    </p>`;
 }
 
 function setupMiniViewportDrag(vp) {
@@ -519,7 +619,7 @@ function setupMiniViewportDrag(vp) {
 }
 
 function initProjects() {
-  initShowcase(projects);
+  initShowcase([...projects, ...projectsCustom]);
   initCustomProjects();
 }
 
@@ -750,6 +850,7 @@ function initHeader() {
 
 initBrand();
 initSeo();
+initAnalytics();
 initContact();
 initContactForm();
 initStickyCta();

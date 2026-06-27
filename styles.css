@@ -947,6 +947,47 @@ body.is-loaded .hero__stage {
   border-radius: 0 var(--radius) var(--radius) 0;
 }
 
+.showcase__type {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--grad-accent);
+  padding: 0.28rem 0.6rem;
+  border-radius: 999px;
+  width: fit-content;
+}
+
+.showcase__results {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+}
+
+.showcase__results li {
+  font-size: 0.88rem;
+  color: var(--cream);
+  padding-left: 1.1rem;
+  position: relative;
+  line-height: 1.45;
+}
+
+.showcase__results li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
 .showcase__desc {
   font-size: 0.95rem;
   color: var(--muted);
@@ -1772,9 +1813,20 @@ body.is-loaded .hero__stage {
 
 /* ── Projets sur mesure ── */
 .custom-projects {
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border);
+  margin-top: 1.5rem;
+}
+
+.custom-projects__note {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 1rem 1.25rem;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--cream);
+  border-radius: var(--radius);
+  background: rgba(var(--purple-rgb), 0.1);
+  border: 1px solid rgba(var(--purple-rgb), 0.22);
 }
 
 .custom-projects__title {
@@ -2026,6 +2078,24 @@ body.is-loaded .hero__stage {
   font-size: 0.9rem;
   color: var(--accent-deep);
   line-height: 1.5;
+}
+
+.contact-form__status--error {
+  color: #c45d44;
+}
+
+.contact-form__honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.contact-form__submit:disabled {
+  opacity: 0.7;
+  cursor: wait;
 }
 
 /* ── Aperçu screenshot ── */
