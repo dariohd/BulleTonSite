@@ -1,5 +1,5 @@
 /**
- * Identité — Bulle ton site
+ * Identité, Bulle ton site
  */
 export const themes = [
   { id: 'mineral', label: 'Bulle', swatch: '#a78bfa' },
@@ -37,11 +37,11 @@ export const brand = {
   byline: 'Création de sites web',
   tagline: 'Sites internet sur mesure',
   description:
-    'Bulle ton site — création de sites web sur mesure pour artisans, gîtes et commerces. Vitrines, outils métier, réservations. Devis gratuit sous 24 h.',
+    'Bulle ton site, création de sites web sur mesure pour artisans, gîtes et commerces. Vitrines, outils métier, réservations. Devis gratuit sous 24 h.',
 };
 
 export const seo = {
-  title: 'Bulle ton site — Création de sites web sur mesure',
+  title: 'Bulle ton site · Création de sites web sur mesure',
   description:
     'Sites web et outils sur mesure : communication, création d\'identité visuelle et développement réunis. Artisans, gîtes, commerces. Dès 450 € · devis gratuit sous 24 h.',
   ogImage: 'assets/og-bubble.svg',
@@ -50,7 +50,7 @@ export const seo = {
 export const guarantees = [
   'Devis gratuit sous 24 h',
   'Paiement en 2 fois',
-  'Hébergement 5 €/mois',
+  'Entretien & maintenance 20 €/mois',
   'Équipe dédiée',
 ];
 
@@ -70,7 +70,7 @@ export const form = {
   web3formsAccessKey: '',
 };
 
-/** Statistiques Plausible — activer après création du site sur plausible.io */
+/** Statistiques Plausible, activer après création du site sur plausible.io */
 export const analytics = {
   enabled: true,
   domain: 'bulletonsite.com',
@@ -90,7 +90,7 @@ export const hero = {
   title: 'Votre site internet,',
   titleEm: 'conçu en équipe.',
   lead:
-    'Communication, création d\'identité visuelle et développement réunis : vitrines, réservations, outils métier — nous créons ce dont vous avez besoin. Un interlocuteur par métier, du brief au prototype en quelques jours.',
+    'Communication, création d\'identité visuelle et développement réunis : vitrines, réservations, outils métier. Nous créons ce dont vous avez besoin. Un interlocuteur par métier, du brief au prototype en quelques jours.',
   chips: ['Équipe dédiée', 'Prototype en 2–3 jours', 'Mobile & Google'],
   ctaPrimary: 'Demander un devis gratuit',
   ctaSecondary: 'Voir nos réalisations',
@@ -118,7 +118,7 @@ export const services = [
   {
     icon: '✓',
     title: 'Site qui rassure',
-    text: 'Présentation claire de votre activité, photos, tarifs et contact — vos clients comprennent tout en 30 secondes.',
+    text: 'Présentation claire de votre activité, photos, tarifs et contact, vos clients comprennent tout en 30 secondes.',
   },
   {
     icon: '✓',
@@ -159,7 +159,7 @@ export const projects = [
     url: 'https://quai-des-reves.vercel.app/',
     image: './assets/screenshots/quai-accueil.png',
     description:
-      'Histoire de l\'ancienne gare, chambres, carte du GR37 — et un formulaire pour demander une nuitée en direct.',
+      'Histoire de l\'ancienne gare, chambres, carte du GR37, et un formulaire pour demander une nuitée en direct.',
     outcome: 'Une vitrine chaleureuse qui donne envie de réserver sur place.',
     results: ['Prototype en 3 jours', 'Formulaire nuitées intégré', '100 % à distance'],
     tags: ['Storytelling', 'Réservation'],
@@ -210,7 +210,7 @@ export const testimonials = [
   },
   {
     quote:
-      'Site livré rapidement, très propre sur mobile. Les réservations arrivent directement par mail — exactement ce qu\'on voulait.',
+      'Site livré rapidement, très propre sur mobile. Les réservations arrivent directement par mail, exactement ce qu\'on voulait.',
     author: 'La Maison d\'Ela',
     role: 'Chambre d\'hôtes · Dordogne',
   },
@@ -245,13 +245,14 @@ export const pricing = {
   from: 450,
   note: 'Fourchettes indicatives · Chaque projet fait l\'objet d\'un devis personnalisé',
   hosting: {
-    price: 5,
-    label: '5 €/mois',
-    detail: 'Serveur, HTTPS et mise en ligne — nom de domaine en option (~12 €/an)',
+    price: 20,
+    label: '20 €/mois',
+    heading: "d'entretien et maintenance",
+    detail: 'Hébergement, HTTPS, surveillance et mises à jour de sécurité, nom de domaine en option (~12 €/an)',
   },
   example: {
-    label: 'Exemple — chambre d\'hôtes',
-    range: '~550 €',
+    label: 'Exemple : chambre d\'hôtes',
+    range: '~690 €',
     detail: 'Présentation du lieu, galerie photos, formulaire de réservation et version mobile optimisée.',
   },
   tiers: [
@@ -281,7 +282,7 @@ export const pricing = {
   footnotes: [
     'Devis gratuit · Sans engagement',
     'Pas de frais cachés',
-    'Hébergement : 5 €/mois (HTTPS inclus)',
+    'Entretien & maintenance : 20 €/mois (hébergement et HTTPS inclus)',
     'Paiement en 2 fois : acompte, solde à la livraison',
   ],
 };
@@ -289,7 +290,7 @@ export const pricing = {
 export const comparison = {
   title: 'Faire soi-même ou être accompagné ?',
   subtitle:
-    'IONOS, Wix et les autres constructeurs en ligne conviennent si vous avez le temps de tout gérer. Nous, on conçoit un site à votre image — avec une équipe qui vous guide.',
+    'IONOS, Wix et les autres constructeurs en ligne conviennent si vous avez le temps de tout gérer. Nous, on conçoit un site à votre image, avec une équipe qui vous guide.',
   disclaimer:
     'Comparaison indicative à titre informatif, sans valeur contractuelle. Offres et tarifs des plateformes tierces susceptibles d\'évoluer.',
   them: {
@@ -346,19 +347,19 @@ export const faq = [
   },
   {
     q: 'Comment modifier mon site après la livraison ?',
-    a: 'Vous nous contactez : nous appliquons les changements pour vous (textes, photos, horaires…). Les premiers petits ajustements sont en général offerts — au-delà, nous vous indiquons un devis avant toute intervention.',
+    a: 'Vous nous contactez : nous appliquons les changements pour vous (textes, photos, horaires…). Les premiers petits ajustements sont en général offerts ; au-delà, nous vous indiquons un devis avant toute intervention.',
   },
   {
-    q: 'Que comprend l\'hébergement ?',
-    a: '5 €/mois pour garder votre site en ligne : serveur, certificat HTTPS (cadenas) et maintenance de base. Le nom de domaine (votrenom.fr) est en option, environ 10–15 €/an. Tout est détaillé dans votre devis, sans frais cachés.',
+    q: 'Que comprend l\'entretien et la maintenance ?',
+    a: '20 €/mois pour garder votre site en ligne, à jour et sécurisé : hébergement, certificat HTTPS (cadenas), surveillance technique et mises à jour de sécurité. Le nom de domaine (votrenom.fr) est en option, environ 10–15 €/an. Tout est détaillé dans votre devis, sans frais cachés.',
   },
   {
-    q: 'Que comprennent les 5 €/mois ?',
-    a: 'La mise en ligne, le HTTPS, l\'espace serveur et la surveillance technique. Ce n\'est pas un abonnement « site builder » type Wix : votre site vous appartient, nous gérons l\'infra pour vous.',
+    q: 'Que comprennent les 20 €/mois ?',
+    a: 'L\'hébergement, le HTTPS, la surveillance du site et l\'entretien technique (sécurité, disponibilité). Pour les modifications de contenu (textes, photos…), vous nous contactez. Les petits ajustements sont en général inclus, les changements plus importants font l\'objet d\'un devis.',
   },
   {
     q: 'Le nom de domaine est-il inclus ?',
-    a: 'Non, il n\'est pas inclus dans les 5 €/mois. Nous pouvons l\'acheter et le configurer pour vous — comptez environ 10–15 €/an selon l\'extension (.fr, .com…), sans marge cachée.',
+    a: 'Non, il n\'est pas inclus dans les 20 €/mois. Nous pouvons l\'acheter et le configurer pour vous. Comptez environ 10–15 €/an selon l\'extension (.fr, .com…), sans marge cachée.',
   },
   {
     q: 'Travaillez-vous avec mon métier ?',
@@ -366,7 +367,7 @@ export const faq = [
   },
   {
     q: 'Travaillez-vous à distance ?',
-    a: 'Oui, 100 % à distance partout en France. Échanges par visio, téléphone et e-mail — pas besoin de déplacement.',
+    a: 'Oui, 100 % à distance partout en France. Échanges par visio, téléphone et e-mail, pas besoin de déplacement.',
   },
   {
     q: 'Comment se passe le paiement ?',
@@ -396,7 +397,7 @@ export const about = {
   title: "L'équipe",
   text: 'Audrey (communication), Niyazi (identité visuelle & graphisme) et Hugo (développement) : trois métiers complémentaires pour un site cohérent de A à Z.',
   blurb:
-    'Pas de sous-traitance opaque ni d\'interlocuteurs multiples — vous savez qui fait quoi à chaque étape.',
+    'Pas de sous-traitance opaque ni d\'interlocuteurs multiples. Vous savez qui fait quoi à chaque étape.',
 };
 
 export const legal = {

@@ -10,7 +10,7 @@ QUI FAIT QUOI
   ajouter l'en-tête CSP frame-ancestors qui autorise bulletonsite.
 
 • Sur le portfolio (BulleWeb) :
-  rien de bloquant côté sortie — les sites clients doivent autoriser l'embed.
+  rien de bloquant côté sortie, les sites clients doivent autoriser l'embed.
 
 • bulletonsite.com :
   même config Vercel que bulletonsite.vercel.app (domaine custom dans Vercel → Settings → Domains).

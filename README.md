@@ -2,7 +2,7 @@
 
 Site vitrine commercial (artisans, tourisme, commerces locaux).
 
-Le site utilise des modules JavaScript — **ne pas ouvrir `index.html` en double-clic**.
+Le site utilise des modules JavaScript, **ne pas ouvrir `index.html` en double-clic**.
 
 ## Lancer en local
 
@@ -16,7 +16,7 @@ Puis ouvrir : **http://localhost:3000**
 
 ## Miniatures interactives (après déploiement)
 
-Voir `embed-templates/LISEZMOI.txt` et `embed-templates/PROMPTS.md` — copier `vercel.json` sur chaque site client pour autoriser l'aperçu iframe depuis bulletonsite.com.
+Voir `embed-templates/LISEZMOI.txt` et `embed-templates/PROMPTS.md`, copier `vercel.json` sur chaque site client pour autoriser l'aperçu iframe depuis bulletonsite.com.
 et remplacer `VOTRE-DOMAINE.fr` par l'URL de ce portfolio.
 
 Mettre à jour `config.js` → `portfolio.url` en même temps.

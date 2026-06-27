@@ -1,4 +1,4 @@
-/* ── Thème bulle (défaut) — rose · violet · bleu pastel sur fond navy doux ── */
+/* ── Thème bulle (défaut), rose · violet · bleu pastel sur fond navy doux ── */
 :root,
 [data-theme='mineral'] {
   --black: #eef0f9;
@@ -16,7 +16,7 @@
   --border-strong: #c5cee8;
 }
 
-/* Autres palettes — conservées pour compatibilité */
+/* Autres palettes, conservées pour compatibilité */
 [data-theme='corail'] {
   --black: #faf7f5;
   --bg: #ffffff;

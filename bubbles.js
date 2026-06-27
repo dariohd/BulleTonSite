@@ -1,5 +1,5 @@
 /**
- * Bulles flottantes — rose · violet · bleu pastel (palette bulle).
+ * Bulles flottantes, rose · violet · bleu pastel (palette bulle).
  */
 export function initBubbles() {
   const canvas = document.getElementById('site-bubbles');

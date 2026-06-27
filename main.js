@@ -129,7 +129,7 @@ function initContactForm() {
     const activity = String(data.get('activity') || '').trim();
     const need = String(data.get('need') || '').trim();
     const budget = String(data.get('budget') || '').trim();
-    const message = String(data.get('message') || '—').trim();
+    const message = String(data.get('message') || '…').trim();
 
     if (data.get('_gotcha')) return;
 
@@ -140,7 +140,7 @@ function initContactForm() {
       need,
       budget,
       message,
-      subject: `Devis Bulle ton site — ${activity}`,
+      subject: `Devis Bulle ton site : ${activity}`,
     };
 
     if (submitBtn) {
@@ -196,7 +196,7 @@ function initContactForm() {
       formEl.reset();
       if (status) {
         status.textContent =
-          'Message envoyé — nous vous répondons sous 24 h. Pensez à vérifier vos spams.';
+          'Message envoyé. Nous vous répondons sous 24 h. Pensez à vérifier vos spams.';
       }
     } catch {
       if (status) {
@@ -336,7 +336,7 @@ function miniBrowserHtml(p) {
           ${imgFallback ? `<img class="mini-browser__fallback-img" src="${imgFallback}" alt="Aperçu ${p.name}" hidden />` : ''}
         </div>
       </div>
-      <p class="mini-browser__fallback">Aperçu indisponible — <a href="${p.url}" target="_blank" rel="noopener">ouvrir ${domain}</a></p>
+      <p class="mini-browser__fallback">Aperçu indisponible, <a href="${p.url}" target="_blank" rel="noopener">ouvrir ${domain}</a></p>
     </div>`;
 }
 
@@ -576,7 +576,7 @@ function initCustomProjects() {
 
   el.innerHTML = `
     <p class="custom-projects__note reveal">
-      Le carrousel inclut aussi des <strong>outils sur mesure</strong> — applications métier, PWA et tableaux de bord.
+      Le carrousel inclut aussi des <strong>outils sur mesure</strong> : applications métier, PWA et tableaux de bord.
       Faites défiler jusqu'à <strong>SQCDP</strong> pour un exemple interactif.
     </p>`;
 }
@@ -750,7 +750,8 @@ function initPricing() {
 
   const hostingEl = document.getElementById('pricing-hosting');
   if (hostingEl && pricing.hosting) {
-    hostingEl.innerHTML = `<strong>${pricing.hosting.label} d'hébergement</strong><span>${pricing.hosting.detail}</span>`;
+    const heading = pricing.hosting.heading ?? "d'hébergement";
+    hostingEl.innerHTML = `<strong>${pricing.hosting.label} ${heading}</strong><span>${pricing.hosting.detail}</span>`;
   }
 }
 

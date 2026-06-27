@@ -37,7 +37,7 @@ Fusionne avec les headers existants si besoin. Redéploie ensuite.
 
 ---
 
-## La Maison d'Elá — lamaisondela.com
+## La Maison d'Elá, lamaisondela.com
 
 ```
 Contexte : ce site est montré en aperçu interactif sur https://bulletonsite.com (section Réalisations).
@@ -56,7 +56,7 @@ Redéploie sur Vercel après le changement.
 
 ---
 
-## Quai des Rêves — quai-des-reves.vercel.app
+## Quai des Rêves, quai-des-reves.vercel.app
 
 ```
 Ce site doit pouvoir s'afficher en iframe sur bulletonsite.com (portfolio Bulle ton site).
@@ -70,7 +70,7 @@ Redéploie sur Vercel.
 
 ---
 
-## ETCBC — etcbc-charpente.com
+## ETCBC, etcbc-charpente.com
 
 ```
 Autorise l'encadrement de ce site par mon portfolio :
@@ -84,7 +84,7 @@ Ne modifie pas le design ni les pages. Commit + push pour déclencher le redépl
 
 ---
 
-## SQCDP — sqcdp.vercel.app
+## SQCDP, sqcdp.vercel.app
 
 ```
 Le portfolio bulletonsite.com affiche sqcdp.vercel.app dans un mini-navigateur.
