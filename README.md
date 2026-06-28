@@ -1,34 +1,119 @@
-# Bulle ton site
+# Bulle ton site — Documentation projet
 
-Site vitrine commercial (artisans, tourisme, commerces locaux).
+Site commercial one-page pour **Bulle ton site** — création de sites web pour artisans, tourisme et commerces locaux.
 
-Le site utilise des modules JavaScript, **ne pas ouvrir `index.html` en double-clic**.
+| | |
+|---|---|
+| **URL production** | https://bulletonsite.com |
+| **Diapo promo** | https://bulletonsite.com/diapo/ |
+| **Dépôt GitHub** | [github.com/dariohd/BulleTonSite](https://github.com/dariohd/BulleTonSite) |
+| **Hébergement** | Vercel |
+| **Création** | Hugo Davion |
 
-## Lancer en local
+---
+
+## Stack technique
+
+- HTML5, CSS3, **JavaScript modules** (ESM)
+- Thèmes CSS interchangeables
+- Carrousel de **réalisations clients** avec mini-navigateurs iframe
+- `serve` en local (port 3000)
+- Vercel : déploiement statique
+
+---
+
+## Fonctionnalités
+
+- One-page dynamique : hero, services, équipe, processus, tarifs, FAQ
+- **Portfolio intégré** : aperçus live des sites clients (iframe)
+- **Diapo verticale 9:16** (`/diapo/`) pour réseaux sociaux
+- Formulaire contact
+- Config centralisée (`config.js`) : textes, tarifs, témoignages, projets
+- Templates d'embed pour nouveaux clients (`embed-templates/`)
+- SEO + Open Graph
+
+---
+
+## Structure du projet
+
+```
+BulleTonSite/
+├── index.html
+├── config.js           # ★ Contenu éditable (brand, offres, portfolio)
+├── main.js, styles.css
+├── diapo/              # Diaporama publié (sync depuis Communication)
+├── embed-templates/    # vercel.json + prompts iframe clients
+├── assets/             # Images, screenshots clients, OG
+├── vercel.json
+└── package.json
+```
+
+---
+
+## Prérequis
+
+- Node.js 18+
+- npm
+
+---
+
+## Développement local
 
 ```bash
-cd BulleTonSite
 npm install
 npm start
 ```
 
-Puis ouvrir : **http://localhost:3000**
+→ **http://localhost:3000**
+
+> Ne pas ouvrir `index.html` en double-clic (modules ES).
+
+---
 
 ## Diapo promo
 
-Présentation verticale (Stories / réseaux) : **http://localhost:3000/diapo/** — en ligne sur [bulletonsite.com/diapo/](https://bulletonsite.com/diapo/).
+- Local : http://localhost:3000/diapo/
+- Production : https://bulletonsite.com/diapo/
 
-Contenu éditable dans le dossier voisin `Entreprise/Communication(PasUnProjet)` (`npm run sync:site` pour publier sur le site).
+Contenu édité dans `Entreprise/Communication(PasUnProjet)/`, puis publié :
 
-## Miniatures interactives (après déploiement)
+```bash
+cd ../Communication(PasUnProjet)
+npm run sync:site
+```
 
-Voir `embed-templates/LISEZMOI.txt` et `embed-templates/PROMPTS.md`, copier `vercel.json` sur chaque site client pour autoriser l'aperçu iframe depuis bulletonsite.com.
-et remplacer `VOTRE-DOMAINE.fr` par l'URL de ce portfolio.
+---
 
-Mettre à jour `config.js` → `portfolio.url` en même temps.
+## Miniatures iframe (sites clients)
 
-## Identité
+Pour qu'un site client s'affiche dans le carrousel Bulle ton site :
 
-Configuré dans `config.js` → `brand` (**Bulle ton site**).
+1. Copier `embed-templates/vercel.json` sur le site client (CSP `frame-ancestors`)
+2. Remplacer le domaine dans la config
+3. Mettre à jour `config.js` → entrée `portfolio` du client
 
-Repo : [github.com/dariohd/BulleTonSite](https://github.com/dariohd/BulleTonSite)
+Voir `embed-templates/LISEZMOI.txt` et `PROMPTS.md`.
+
+---
+
+## Personnalisation
+
+Tout le contenu marketing est dans **`config.js`** :
+
+- `brand` — nom, baseline, contact
+- `offers` — formules et prix
+- `portfolio` — sites clients (URL, captures, tags)
+- `team`, `testimonials`, `faq`
+
+---
+
+## Déploiement
+
+Push `main` → Vercel auto-deploy sur bulletonsite.com.
+
+---
+
+## Contact
+
+- **Bulle ton site** — [bulletonsite.com](https://bulletonsite.com)
+- Hugo Davion — davionhugo@gmail.com
