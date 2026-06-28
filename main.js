@@ -707,12 +707,21 @@ function initPricing() {
   const fromEl = document.getElementById('price-from');
   if (fromEl) fromEl.textContent = `${pricing.from} €`;
 
+  const fromNoteEl = document.getElementById('price-from-note');
+  if (fromNoteEl && pricing.fromNote) fromNoteEl.textContent = pricing.fromNote;
+
+  const disclaimerEl = document.getElementById('pricing-disclaimer');
+  if (disclaimerEl && pricing.disclaimer) disclaimerEl.textContent = pricing.disclaimer;
+
   const exampleEl = document.getElementById('pricing-example');
   if (exampleEl && pricing.example) {
+    const rangeNote = pricing.example.rangeNote
+      ? ` <span class="pricing-example__devis">${pricing.example.rangeNote}</span>`
+      : '';
     exampleEl.innerHTML = `
       <div class="pricing-example__inner">
         <span class="pricing-example__label">${pricing.example.label}</span>
-        <strong class="pricing-example__range">${pricing.example.range}</strong>
+        <strong class="pricing-example__range">${pricing.example.range}${rangeNote}</strong>
         <p class="pricing-example__detail">${pricing.example.detail}</p>
       </div>`;
   }

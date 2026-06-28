@@ -278,6 +278,25 @@ body {
   margin-top: 0.15rem;
 }
 
+.slide__price-from-note {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: clamp(0.72rem, 2.8cqw, 0.95rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.slide__price-col--prix small {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.72em;
+  font-weight: 600;
+  color: var(--muted);
+  font-style: normal;
+}
+
 .slide__sub--gold {
   color: var(--gold) !important;
   font-weight: 600;
@@ -571,18 +590,58 @@ body {
 }
 
 /* Slide tarifs */
-.slide--pricing .slide__title {
-  font-size: clamp(1.25rem, 5.2cqw, 1.8rem);
-  margin-bottom: 0.1rem;
+.slide--pricing .slide__title--pricing {
+  font-size: clamp(1.35rem, 5.5cqw, 2rem);
+  margin-bottom: 0.15rem;
 }
 
 .slide--pricing .slide__price-from {
-  margin-top: 0.25rem;
+  margin-top: 0.2rem;
 }
 
 .slide--pricing .slide__sub--gold {
-  margin-top: 0.15rem !important;
-  margin-bottom: 0.25rem;
+  margin-top: 0.1rem !important;
+  margin-bottom: 0.35rem;
+}
+
+.slide__price-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.slide--pricing .slide__price-example {
+  margin-top: 0.55rem;
+  font-size: clamp(0.78rem, 3.2cqw, 0.95rem);
+}
+
+.slide__price-maint-compact {
+  margin-top: 0.35rem;
+  font-size: clamp(0.72rem, 3cqw, 0.88rem);
+  color: var(--muted);
+  text-align: center;
+}
+
+.slide--cta .slide__title--cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  line-height: 1.1;
+}
+
+.slide__title-line {
+  display: block;
+}
+
+.slide__title-accent {
+  font-style: normal;
+  background: var(--grad-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  white-space: nowrap;
 }
 
 .slide--pricing .slide__price-table {

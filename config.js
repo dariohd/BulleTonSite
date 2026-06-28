@@ -45,12 +45,13 @@ export const brand = {
 export const seo = {
   title: 'Bulle ton site · Création de sites web sur mesure',
   description:
-    'Sites web et outils sur mesure : communication, création d\'identité visuelle et développement réunis. Artisans, gîtes, commerces. Dès 450 € · devis gratuit sous 24 h.',
+    'Sites web et outils sur mesure : communication, création d\'identité visuelle et développement réunis. Artisans, gîtes, commerces. Repères à partir de 450 € · devis gratuit et personnalisé sous 24 h.',
   ogImage: 'assets/og-bubble.svg',
 };
 
 export const guarantees = [
   'Devis gratuit sous 24 h',
+  'Prix affichés indicatifs · toujours sur devis',
   'Paiement en 2 fois',
   'Entretien & maintenance 20 €/mois',
   'Équipe dédiée',
@@ -98,7 +99,7 @@ export const hero = {
   ctaSecondary: 'Voir nos réalisations',
   stats: [
     { value: '4', suffix: '+', label: 'sites livrés' },
-    { value: '450', suffix: '€', label: 'dès' },
+    { value: '450', suffix: '€', label: 'dès · sur devis' },
     { value: '1–2', suffix: ' sem.', label: 'de création' },
     { value: '2–3', suffix: ' jours', label: 'premier prototype' },
   ],
@@ -243,25 +244,29 @@ export const process = {
 };
 
 export const pricing = {
-  title: 'Des tarifs transparents',
+  title: 'Des tarifs transparents, toujours sur devis',
   from: 450,
-  note: 'Fourchettes indicatives · Chaque projet fait l\'objet d\'un devis personnalisé',
+  fromNote: 'Montant indicatif · devis personnalisé gratuit',
+  disclaimer:
+    'Les fourchettes et exemples ci-dessous vous aident à vous projeter. Chaque projet fait l\'objet d\'un devis gratuit, détaillé et sans engagement : seul ce document fait foi avant toute commande.',
+  note: 'Repères indicatifs · Devis gratuit sous 24 h · Sans engagement',
   hosting: {
     price: 20,
     label: '20 €/mois',
     heading: "d'entretien et maintenance",
-    detail: 'Hébergement, HTTPS, surveillance et mises à jour de sécurité, nom de domaine en option (~12 €/an)',
+    detail: 'Hébergement, HTTPS, surveillance et mises à jour de sécurité, nom de domaine en option (~12 €/an) · montant confirmé sur devis',
   },
   example: {
-    label: 'Exemple : chambre d\'hôtes',
+    label: 'Exemple indicatif : chambre d\'hôtes',
     range: '~690 €',
-    detail: 'Présentation du lieu, galerie photos, formulaire de réservation et version mobile optimisée.',
+    rangeNote: 'sur devis',
+    detail: 'Présentation du lieu, galerie photos, formulaire de réservation et version mobile optimisée. Montant repère : le devis reprendra chaque poste après échange sur votre projet.',
   },
   tiers: [
     {
       label: 'Site sur mesure',
       range: '450 – 900 €',
-      rangeNote: 'Sur devis',
+      rangeNote: 'Fourchette indicative · devis gratuit',
       features: [
         'Présentation, galerie & pages',
         'Formulaire de contact ou réservation',
@@ -273,7 +278,7 @@ export const pricing = {
     {
       label: 'Site dynamique',
       range: '1 000 € et +',
-      rangeNote: 'Sur devis',
+      rangeNote: 'Sur devis selon cahier des charges',
       features: [
         'Réservations ou espaces clients',
         'Évolutions & mises à jour',
@@ -282,9 +287,9 @@ export const pricing = {
     },
   ],
   footnotes: [
-    'Devis gratuit · Sans engagement',
-    'Pas de frais cachés',
-    'Entretien & maintenance : 20 €/mois (hébergement et HTTPS inclus)',
+    'Toujours sur devis : les montants affichés ne constituent pas une offre ferme',
+    'Devis gratuit · Sans engagement · Pas de frais cachés',
+    'Entretien & maintenance : 20 €/mois (hébergement et HTTPS inclus, confirmé sur devis)',
     'Paiement en 2 fois : acompte, solde à la livraison',
   ],
 };
@@ -338,6 +343,10 @@ export const comparison = {
 };
 
 export const faq = [
+  {
+    q: 'Les prix affichés sur le site sont-ils définitifs ?',
+    a: 'Non. Les montants et fourchettes servent de repères pour vous orienter. Avant tout engagement, nous établissons un devis gratuit, détaillé et adapté à votre projet : c\'est lui qui fait foi. Rien n\'est facturé sans votre accord sur ce devis.',
+  },
   {
     q: 'Combien de temps pour avoir mon site ?',
     a: 'Comptez 2–3 jours pour un premier prototype, puis 1 à 2 semaines pour la version finale selon le nombre de pages et vos retours.',

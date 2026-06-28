@@ -26,6 +26,10 @@ let elapsed = 0;
 let playing = true;
 let slideEls = [];
 
+function formatTimeNbsp(text) {
+  return String(text).replace(/(\d+)\s+h\b/gi, '$1\u00a0h');
+}
+
 function escapeHtml(s) {
   const d = document.createElement('div');
   d.textContent = s;
@@ -248,53 +252,42 @@ function renderSlide(data, i) {
       }
     `;
   } else if (data.type === 'pricing') {
-    const tiersHtml = pricing.tiers
-      .map((t) => {
-        const mainClass = t.highlight ? ' slide__price-row--main' : '';
-        return `
-      <div class="slide__price-row${mainClass}">
-        <span class="slide__price-col slide__price-col--label">${escapeHtml(t.label)}</span>
-        <span class="slide__price-col slide__price-col--contenu">${escapeHtml(t.contenu)}</span>
-        <span class="slide__price-col slide__price-col--prix">
-          <em>${escapeHtml(t.range)}</em>
-        </span>
-      </div>`;
-      })
+    const cardsHtml = pricing.tiers
+      .map(
+        (t) => `
+      <div class="slide__price-card${t.highlight ? ' slide__price-card--main' : ''}">
+        <strong>${escapeHtml(t.label)}</strong>
+        <div class="slide__price-amount"><em>${escapeHtml(t.range)}</em></div>
+      </div>`,
+      )
       .join('');
-    const footnotesHtml = pricing.footnotes.map((f) => `<li>${escapeHtml(f)}</li>`).join('');
-    const maint = pricing.maintenance
-      ? `<p class="slide__price-maint"><strong>${escapeHtml(pricing.maintenance.label)}</strong> ${escapeHtml(pricing.maintenance.heading)}<br><span>${escapeHtml(pricing.maintenance.detail)}</span></p>`
-      : '';
 
     el.classList.add('slide--pricing');
     el.innerHTML = `
       <p class="slide__eyebrow">Tarifs</p>
-      <h2 class="slide__title">${escapeHtml(pricing.hook)}</h2>
+      <h2 class="slide__title slide__title--pricing">${escapeHtml(pricing.hook)}</h2>
       <p class="slide__price-from">À partir de <em>${pricing.from} €</em></p>
-      <p class="slide__sub slide__sub--gold">${escapeHtml(pricing.compare)}</p>
+      <p class="slide__sub slide__sub--gold">${escapeHtml(formatTimeNbsp(pricing.tagline))}</p>
+      <div class="slide__price-cards">${cardsHtml}</div>
       <p class="slide__price-example">${escapeHtml(pricing.example)}</p>
-      <div class="slide__price-table">
-        <div class="slide__price-row slide__price-row--head">
-          <span class="slide__price-col slide__price-col--label">Forfait</span>
-          <span class="slide__price-col slide__price-col--contenu">Contenu</span>
-          <span class="slide__price-col slide__price-col--prix">Prix</span>
-        </div>
-        ${tiersHtml}
-      </div>
-      ${maint}
-      <ul class="slide__bullets slide__bullets--compact slide__price-footnotes">${footnotesHtml}</ul>
+      ${pricing.maintenance ? `<p class="slide__price-maint-compact">${escapeHtml(pricing.maintenance)}</p>` : ''}
       ${captionHtml(data.caption)}
     `;
   } else if (data.type === 'cta') {
     const tel = contact.phone.replace(/\s/g, '');
-    const titleEm = data.titleEm ? ` <em>${escapeHtml(data.titleEm)}</em>` : '';
+    const titleEm = data.titleEm
+      ? `<em class="slide__title-accent">${escapeHtml(formatTimeNbsp(data.titleEm))}</em>`
+      : '';
     el.classList.add('slide--cta');
     el.innerHTML = `
       <img class="slide__logo slide__logo--cta" src="${escapeHtml(resolveAsset(brand.logo))}" alt="" width="64" height="64" />
       <p class="slide__eyebrow">Contact</p>
-      <h2 class="slide__title">${escapeHtml(data.title)}${titleEm}</h2>
-      <p class="slide__sub">${escapeHtml(data.sub)}</p>
-      <p class="slide__cta-response">${escapeHtml(contact.responseTime)}</p>
+      <h2 class="slide__title slide__title--cta">
+        <span class="slide__title-line">${escapeHtml(data.title)}</span>
+        ${titleEm}
+      </h2>
+      <p class="slide__sub">${escapeHtml(formatTimeNbsp(data.sub))}</p>
+      <p class="slide__cta-response">${escapeHtml(formatTimeNbsp(contact.responseTime))}</p>
       <div class="slide__contact">
         <a href="mailto:${escapeHtml(contact.email)}">${escapeHtml(contact.email)}</a>
         <a href="tel:${tel}">${escapeHtml(contact.phone)}</a>

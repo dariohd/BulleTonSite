@@ -118,33 +118,15 @@ export const guarantees = [
 ];
 
 export const pricing = {
-  hook: 'Des tarifs transparents',
-  compare: 'Fourchettes indicatives · Devis personnalisé',
-  example: 'Ex. chambre d\'hôtes · site vitrine ≈ 690 €',
+  hook: 'Tarifs transparents',
+  tagline: 'Toujours sur devis · gratuit sous 24 h',
   from: 450,
-  maintenance: {
-    label: '20 €/mois',
-    heading: "d'entretien et maintenance",
-    detail: 'Hébergement, HTTPS et surveillance inclus',
-  },
   tiers: [
-    {
-      label: 'Site sur mesure',
-      contenu: 'Présentation, galerie, formulaire contact ou réservation, mobile & Google.',
-      range: '450 – 900 €',
-      highlight: true,
-    },
-    {
-      label: 'Site dynamique',
-      contenu: 'Réservations, espaces clients, évolutions et fonctionnalités sur mesure.',
-      range: '1 000 € et +',
-    },
+    { label: 'Site sur mesure', range: '450 – 900 €', highlight: true },
+    { label: 'Site dynamique', range: '1 000 €+' },
   ],
-  footnotes: [
-    'Devis gratuit · Sans engagement',
-    'Entretien & maintenance : 20 €/mois',
-    'Paiement en 2 fois : acompte, solde à la livraison',
-  ],
+  example: 'Ex. chambre d\'hôtes · ~690 €',
+  maintenance: '20 €/mois · entretien & hébergement',
 };
 
 const projectEla = {
@@ -236,7 +218,7 @@ export const slides = [
   { type: 'processDelivery', duration: 5.5 },
   { type: 'testimonial', duration: 4.5 },
   { type: 'guarantees', duration: 4.5 },
-  { type: 'pricing', duration: 7, caption: 'Dès 450 € · Devis gratuit · 20 €/mois entretien' },
+  { type: 'pricing', duration: 5, caption: 'Dès 450 € · Sur devis' },
   {
     type: 'cta',
     duration: 6,
@@ -271,7 +253,7 @@ export const slidesShort = [
   { type: 'sectorsZone', duration: 3.5 },
   { ...projectQuai, duration: 5 },
   { ...projectSqcdp, duration: 4.5 },
-  { type: 'pricing', duration: 6, caption: 'Dès 450 € · Devis gratuit' },
+  { type: 'pricing', duration: 4.5, caption: 'Dès 450 € · Sur devis' },
   {
     type: 'cta',
     duration: 5,

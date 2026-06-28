@@ -1300,11 +1300,29 @@ body.is-loaded .hero__stage {
 }
 
 /* ── Tarifs ── */
+.pricing-disclaimer {
+  max-width: 40rem;
+  margin: 0 auto 1.5rem;
+  padding: 0.85rem 1rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--cream);
+  text-align: center;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: rgba(var(--accent-rgb), 0.06);
+}
+
 .price-from {
   text-align: center;
   font-size: 1.1rem;
   color: var(--muted);
   margin-bottom: 2.5rem;
+}
+
+.price-from__label {
+  display: block;
+  font-size: 0.95rem;
 }
 
 .price-from strong {
@@ -1314,6 +1332,25 @@ body.is-loaded .hero__stage {
   color: var(--accent);
   display: block;
   margin-top: 0.25rem;
+}
+
+.price-from__note {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.pricing-example__devis {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--muted);
+  font-family: 'Inter', system-ui, sans-serif;
 }
 
 /* ── Comparaison ── */
