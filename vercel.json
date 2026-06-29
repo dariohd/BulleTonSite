@@ -2,7 +2,13 @@
   "buildCommand": null,
   "outputDirectory": ".",
   "redirects": [
-    { "source": "/diapo", "destination": "/diapo/", "permanent": true }
+    { "source": "/diapo", "destination": "/diapo/", "permanent": true },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "bulletonsite.com" }],
+      "destination": "https://www.bulletonsite.com/:path*",
+      "permanent": true
+    }
   ],
   "headers": [
     {

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://bulletonsite.com/sitemap.xml
+Sitemap: https://www.bulletonsite.com/sitemap.xml

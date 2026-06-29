@@ -13,9 +13,9 @@ export const themes = [
 export const defaultTheme = 'mineral';
 
 export const portfolio = {
-  url: 'https://bulletonsite.com',
-  domain: 'https://bulletonsite.com',
-  diapoUrl: 'https://bulletonsite.com/diapo/',
+  url: 'https://www.bulletonsite.com',
+  domain: 'https://www.bulletonsite.com',
+  diapoUrl: 'https://www.bulletonsite.com/diapo/',
   localUrl: 'http://localhost:3000',
   localDiapoUrl: 'http://localhost:3000/diapo/',
   /** Domaines autorisés à afficher ce site en iframe (portfolio + préprod locale). */
