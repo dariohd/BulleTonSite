@@ -536,10 +536,10 @@ export const promo = {
 };
 
 export const organization = {
-  parent: 'DARIOH',
+  parent: 'DHD',
   brand: 'Bulle ton site',
   footerLine: 'Bulle ton site',
-  legalName: 'DARIOH',
+  legalName: 'DHD',
   legalContact: 'Hugo Davion',
 };
 
