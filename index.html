@@ -14,6 +14,9 @@
   <meta property="og:description" content="Sites web et outils sur mesure : communication, identité visuelle et développement réunis. Artisans, gîtes, commerces. Vitrine dès 500 € · devis gratuit sous 48 h." id="og-desc" />
   <meta property="og:url" content="https://bulletonsite.com/" />
   <meta property="og:image" content="https://bulletonsite.com/assets/og-bubble.svg" id="og-image" />
+  <meta property="og:image:type" content="image/svg+xml" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Bulle ton site · Création de sites web sur mesure" id="twitter-title" />
   <meta name="twitter:description" content="Sites web et outils sur mesure : communication, identité visuelle et développement réunis. Vitrine dès 500 € · devis gratuit sous 48 h." id="twitter-desc" />
@@ -80,16 +83,7 @@
 
     <div class="trust-bar" id="trust-bar"></div>
 
-    <section class="section" id="services">
-      <div class="container">
-        <header class="section__head reveal">
-          <p class="eyebrow">Services</p>
-          <h2 class="section__title">Ce que vous <em>obtenez</em></h2>
-          <p class="section__sub reveal" id="services-sub"></p>
-        </header>
-        <div class="grid grid--services" id="services-grid"></div>
-      </div>
-    </section>
+    <div class="sectors-strip reveal" id="sectors-strip" aria-label="Secteurs accompagnés"></div>
 
     <section class="section section--alt section--showcase" id="projets">
       <div class="container">
@@ -111,6 +105,29 @@
       <div class="container custom-projects" id="custom-projects"></div>
     </section>
 
+    <section class="section" id="services">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow">Services</p>
+          <h2 class="section__title">Ce que vous <em>obtenez</em></h2>
+          <p class="section__sub reveal" id="services-sub"></p>
+        </header>
+        <div class="grid grid--services" id="services-grid"></div>
+      </div>
+    </section>
+
+    <section class="section section--process" id="process">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow">Méthode & équipe</p>
+          <h2 class="section__title" data-process="title"></h2>
+          <p class="section__sub reveal" data-process="subtitle"></p>
+        </header>
+        <ol class="process-path" id="timeline" aria-label="Parcours et équipe"></ol>
+        <p class="process-note reveal" id="about"></p>
+      </div>
+    </section>
+
     <section class="section section--testimonials" id="temoignages">
       <div class="container">
         <header class="section__head reveal">
@@ -121,18 +138,7 @@
       </div>
     </section>
 
-    <section class="section section--process" id="process">
-      <div class="container">
-        <header class="section__head reveal">
-          <p class="eyebrow">Méthode</p>
-          <h2 class="section__title" data-process="title"></h2>
-          <p class="section__sub reveal" data-process="subtitle"></p>
-        </header>
-        <ol class="process-path" id="timeline"></ol>
-      </div>
-    </section>
-
-    <section class="section" id="comparer">
+    <section class="section section--alt" id="comparer">
       <div class="container">
         <header class="section__head reveal">
           <p class="eyebrow">Comparer</p>
@@ -156,33 +162,16 @@
         </header>
         <div class="pricing-intro reveal" id="pricing-intro"></div>
         <div class="grid grid--pricing grid--pricing-offers reveal" id="pricing-offers"></div>
-        <article class="pricing-block pricing-block--identity reveal" id="pricing-identity"></article>
-        <div class="pricing-block reveal" id="pricing-anchors"></div>
-        <div class="pricing-block reveal" id="pricing-examples"></div>
-        <div class="pricing-pillars reveal" id="pricing-why"></div>
-        <div class="pricing-block pricing-block--hosting reveal">
-          <header class="pricing-block__head" id="pricing-hosting-intro"></header>
-          <div class="grid grid--pricing-hosting" id="pricing-hosting"></div>
+        <div class="pricing-mid-cta reveal">
+          <a class="btn btn--lg" href="#contact">Demander mon devis gratuit</a>
+          <p class="pricing-mid-cta__note">Réponse sous 48 h · sans engagement</p>
         </div>
+        <div class="pricing-folds reveal" id="pricing-details"></div>
         <ul class="footnotes reveal" id="pricing-footnotes"></ul>
       </div>
     </section>
 
     <section class="section section--promo" id="promo"></section>
-
-    <section class="section section--about" id="about">
-      <div class="container">
-        <header class="section__head reveal">
-          <p class="eyebrow">À propos</p>
-          <h2 class="section__title" data-about="title"></h2>
-        </header>
-        <div class="about-intro reveal">
-          <p class="about-intro__lead" data-about="text"></p>
-          <p class="about-intro__note" id="team-blurb"></p>
-        </div>
-        <div class="team" id="team-grid"></div>
-      </div>
-    </section>
 
     <section class="section section--alt" id="faq">
       <div class="container container--narrow">
@@ -199,7 +188,7 @@
         <div class="cta-card reveal">
           <p class="eyebrow">Contact</p>
           <h2 class="cta-card__title">Un devis gratuit <em>sous&nbsp;48&nbsp;h</em></h2>
-          <p class="cta-card__sub">Devis gratuit · Sans engagement</p>
+          <p class="cta-card__sub" data-contact="formSub"></p>
           <p class="cta-card__response" data-contact="response"></p>
           <form class="contact-form" id="contact-form" novalidate>
             <div class="contact-form__row">
@@ -212,37 +201,45 @@
                 <input type="email" name="email" required autocomplete="email" />
               </label>
             </div>
-            <label class="contact-form__field">
-              <span>Votre activité</span>
-              <input type="text" name="activity" required placeholder="Ex. chambre d'hôtes, charpentier…" />
-            </label>
+            <div class="contact-form__row">
+              <label class="contact-form__field">
+                <span>Téléphone <span class="contact-form__optional">(optionnel)</span></span>
+                <input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="06 12 34 56 78" />
+              </label>
+              <label class="contact-form__field">
+                <span>Votre activité</span>
+                <input type="text" name="activity" required placeholder="Ex. chambre d'hôtes, charpentier…" autocomplete="organization" />
+              </label>
+            </div>
             <label class="contact-form__field">
               <span>Ce que vous cherchez</span>
-              <select name="need" required>
-                <option value="">Choisir…</option>
-                <option value="Site internet">Site internet</option>
-                <option value="Site dynamique">Site dynamique</option>
-                <option value="Outil sur mesure">Outil sur mesure</option>
-                <option value="Je ne sais pas encore">Je ne sais pas encore</option>
-              </select>
+              <select name="need" id="contact-need" required></select>
+            </label>
+            <div class="contact-form__row">
+              <label class="contact-form__field">
+                <span>Budget envisagé</span>
+                <select name="budget" id="contact-budget"></select>
+              </label>
+              <label class="contact-form__field">
+                <span>Après la mise en ligne</span>
+                <select name="hosting" id="contact-hosting"></select>
+              </label>
+            </div>
+            <label class="contact-form__field">
+              <span>Délai souhaité</span>
+              <select name="timeline" id="contact-timeline"></select>
             </label>
             <label class="contact-form__field">
-              <span>Budget envisagé</span>
-              <select name="budget">
-                <option value="Non précisé">Non précisé</option>
-                <option value="Site vitrine (500 – 1 500 €)">Site vitrine (500 – 1 500 €)</option>
-                <option value="Site dynamique (2 000 – 3 500 €)">Site dynamique (2 000 – 3 500 €)</option>
-                <option value="Outil métier (4 000 €+)">Outil métier (4 000 €+)</option>
-                <option value="Identité visuelle seule">Identité visuelle seule</option>
-              </select>
+              <span>Décrivez votre projet</span>
+              <textarea name="message" rows="5" required minlength="15" placeholder="Objectif du site, pages souhaitées, exemples de sites que vous aimez, logo déjà prêt ou non…"></textarea>
             </label>
-            <label class="contact-form__field">
-              <span>Message (optionnel)</span>
-              <textarea name="message" rows="4" placeholder="Décrivez votre projet en quelques lignes…"></textarea>
+            <label class="contact-form__field contact-form__field--consent">
+              <input type="checkbox" name="consent" value="yes" required />
+              <span id="contact-consent-label"></span>
             </label>
             <input type="text" name="_gotcha" class="contact-form__honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
             <p class="contact-form__privacy" id="contact-privacy"></p>
-            <button type="submit" class="btn btn--lg contact-form__submit">Envoyer ma demande</button>
+            <button type="submit" class="btn btn--lg contact-form__submit"></button>
             <p class="contact-form__status" id="contact-form-status" role="status" hidden></p>
           </form>
           <div class="cta-card__links">

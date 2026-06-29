@@ -8,8 +8,8 @@ Chaque entrée `portfolio` dans la config a une `url` live. Le carrousel charge 
 
 ## Diapo
 
-Le dossier `diapo/` est une page séparée (format vertical). Le contenu source vit dans `Communication(PasUnProjet)` ; `npm run sync:site` copie vers BulleTonSite.
+Le dossier `diapo/` est une page séparée (format vertical). Le contenu est dans `diapo/config.js`, aligné sur `config.js` du site principal.
 
 ## Déploiement
 
-Statique pur sur Vercel. Pas de variables d'environnement. Formulaire contact : selon implémentation dans `main.js` / `config.js`.
+Statique pur sur Vercel. Pas de variables d'environnement. Formulaire contact : FormSubmit (voir `config.js` → `form.formsubmitEmail`).

@@ -79,19 +79,39 @@ function initSeo() {
   if (schemaEl) {
     schemaEl.textContent = JSON.stringify({
       '@context': 'https://schema.org',
-      '@type': 'Organization',
-      name: organization.brand,
-      url: siteUrl,
-      logo: `${siteUrl}/assets/favicon.svg`,
-      description: seo.description,
-      email: contact.email,
-      telephone: contact.phoneTel,
-      areaServed: 'FR',
-      parentOrganization: {
-        '@type': 'Organization',
-        name: organization.legalName || organization.parent,
-      },
-      sameAs: [],
+      '@graph': [
+        {
+          '@type': 'Organization',
+          name: organization.brand,
+          url: siteUrl,
+          logo: `${siteUrl}/assets/favicon.svg`,
+          description: seo.description,
+          email: contact.email,
+          telephone: contact.phoneTel,
+          areaServed: 'FR',
+          parentOrganization: {
+            '@type': 'Organization',
+            name: organization.legalName || organization.parent,
+          },
+        },
+        {
+          '@type': 'WebSite',
+          name: organization.brand,
+          url: siteUrl,
+          description: seo.description,
+        },
+        {
+          '@type': 'FAQPage',
+          mainEntity: faq.map((item) => ({
+            '@type': 'Question',
+            name: item.q,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: item.a,
+            },
+          })),
+        },
+      ],
     });
   }
 }
@@ -107,6 +127,35 @@ function initAnalytics() {
   document.head.appendChild(s);
 }
 
+function fillFormSelect(select, options) {
+  if (!select || !options?.length) return;
+  select.innerHTML = options
+    .map((opt) => {
+      const attrs = [
+        opt.placeholder ? 'value="" disabled selected hidden' : `value="${opt.value}"`,
+      ].join(' ');
+      return `<option ${attrs}>${opt.label}</option>`;
+    })
+    .join('');
+}
+
+function formatFormSummary(data) {
+  const lines = [
+    `Nom : ${data.name}`,
+    `E-mail : ${data.email}`,
+    data.phone ? `Téléphone : ${data.phone}` : null,
+    `Activité : ${data.activity}`,
+    `Besoin : ${data.need}`,
+    `Budget : ${data.budget}`,
+    `Après mise en ligne : ${data.hosting}`,
+    `Délai souhaité : ${data.timeline}`,
+    '',
+    'Message :',
+    data.message,
+  ].filter(Boolean);
+  return lines.join('\n');
+}
+
 function initContact() {
   setText('[data-contact]', 'contact', contact);
   const emailLink = document.querySelector('[data-contact="email-link"]');
@@ -120,7 +169,22 @@ function initContact() {
     phoneLink.textContent = contact.phone;
   }
   const privacy = document.getElementById('contact-privacy');
-  if (privacy) privacy.textContent = legal.privacyNote;
+  if (privacy) {
+    privacy.innerHTML = `${legal.privacyNote} <a href="${legal.mentionsUrl}">Mentions légales</a>.`;
+  }
+
+  const consentLabel = document.getElementById('contact-consent-label');
+  if (consentLabel) {
+    consentLabel.innerHTML = `${legal.consentLabel} (<a href="${legal.mentionsUrl}">détail</a>)`;
+  }
+
+  fillFormSelect(document.getElementById('contact-need'), form.needs);
+  fillFormSelect(document.getElementById('contact-budget'), form.budgets);
+  fillFormSelect(document.getElementById('contact-hosting'), form.hosting);
+  fillFormSelect(document.getElementById('contact-timeline'), form.timelines);
+
+  const submitBtn = document.querySelector('.contact-form__submit');
+  if (submitBtn && form.submitLabel) submitBtn.textContent = form.submitLabel;
 }
 
 function initContactForm() {
@@ -139,26 +203,48 @@ function initContactForm() {
     const data = new FormData(formEl);
     const name = String(data.get('name') || '').trim();
     const email = String(data.get('email') || '').trim();
+    const phone = String(data.get('phone') || '').trim();
     const activity = String(data.get('activity') || '').trim();
     const need = String(data.get('need') || '').trim();
     const budget = String(data.get('budget') || '').trim();
-    const message = String(data.get('message') || '…').trim();
+    const hosting = String(data.get('hosting') || '').trim();
+    const timeline = String(data.get('timeline') || '').trim();
+    const message = String(data.get('message') || '').trim();
 
     if (data.get('_gotcha')) return;
+    if (!data.get('consent')) {
+      formEl.reportValidity();
+      return;
+    }
+
+    const summary = formatFormSummary({
+      name,
+      email,
+      phone,
+      activity,
+      need,
+      budget,
+      hosting,
+      timeline,
+      message,
+    });
 
     const payload = {
       name,
       email,
+      phone,
       activity,
       need,
       budget,
+      hosting,
+      timeline,
       message,
-      subject: `Devis Bulle ton site : ${activity}`,
+      subject: `Devis Bulle ton site : ${activity} — ${need}`,
     };
 
     if (submitBtn) {
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Envoi en cours…';
+      submitBtn.textContent = form.sendingLabel || 'Envoi en cours…';
     }
     if (status) {
       status.hidden = false;
@@ -177,8 +263,9 @@ function initContactForm() {
             access_key: form.web3formsAccessKey,
             name,
             email,
+            phone,
             subject: payload.subject,
-            message: `Activité : ${activity}\nBesoin : ${need}\nBudget : ${budget}\n\nMessage :\n${message}`,
+            message: summary,
             from_name: name,
             replyto: email,
           }),
@@ -193,9 +280,12 @@ function initContactForm() {
           body: JSON.stringify({
             name,
             email,
+            phone,
             activity,
             need,
             budget,
+            hosting,
+            timeline,
             message,
             _subject: payload.subject,
             _replyto: email,
@@ -210,8 +300,13 @@ function initContactForm() {
       if (!ok) throw new Error('submit failed');
 
       formEl.reset();
+      fillFormSelect(document.getElementById('contact-need'), form.needs);
+      fillFormSelect(document.getElementById('contact-budget'), form.budgets);
+      fillFormSelect(document.getElementById('contact-hosting'), form.hosting);
+      fillFormSelect(document.getElementById('contact-timeline'), form.timelines);
       if (status) {
         status.textContent =
+          form.successMessage ||
           'Message envoyé. Nous vous répondons sous 48 h. Pensez à vérifier vos spams.';
       }
     } catch {
@@ -222,7 +317,7 @@ function initContactForm() {
     } finally {
       if (submitBtn) {
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Envoyer ma demande';
+        submitBtn.textContent = form.submitLabel || 'Envoyer ma demande';
       }
     }
   });
@@ -682,25 +777,47 @@ function initTestimonials() {
     .join('');
 }
 
-function initProcess() {
+function initCrew() {
   setText('[data-process]', 'process', process);
+
   const timeline = document.getElementById('timeline');
+  const note = document.getElementById('about');
+
+  if (note && about.text) {
+    note.innerHTML = about.blurb
+      ? `${about.text} <em>${about.blurb}</em>`
+      : about.text;
+  }
+
   if (!timeline) return;
-  timeline.innerHTML = process.steps
-    .map(
-      (s, i) => `
+
+  timeline.innerHTML = team
+    .map((member, i) => {
+      const step = process.steps[i];
+      if (!step) return '';
+
+      return `
     <li class="process-path__step reveal process-path__step--${i + 1}">
-      <div class="process-path__track" aria-hidden="true">
-        <span class="process-path__node">${s.num}</span>
-        ${i < process.steps.length - 1 ? '<span class="process-path__line"></span>' : ''}
+      <div class="process-path__spine">
+        <span class="process-path__node">${step.num}</span>
+        <span class="process-path__stem" aria-hidden="true"></span>
+        <div class="process-path__photo${member.photo ? '' : ' process-path__photo--fallback'}">
+          ${
+            member.photo
+              ? `<img src="${resolveAsset(member.photo)}" alt="${member.name}" width="72" height="72" loading="lazy" decoding="async" onerror="this.remove(); this.parentElement.classList.add('process-path__photo--fallback')" />`
+              : ''
+          }
+          <span class="process-path__initials" aria-hidden="true">${teamInitials(member.name)}</span>
+        </div>
       </div>
       <div class="process-path__body">
-        <p class="process-path__who">${s.who}</p>
-        <h3 class="process-path__title">${s.title}</h3>
-        <p class="process-path__text">${s.text}</p>
+        <p class="process-path__who">${member.name}</p>
+        <p class="process-path__role">${member.role}</p>
+        <h3 class="process-path__title">${step.title}</h3>
+        <p class="process-path__text">${step.text}</p>
       </div>
-    </li>`,
-    )
+    </li>`;
+    })
     .join('');
 }
 
@@ -708,6 +825,16 @@ function initTrustBar() {
   const el = document.getElementById('trust-bar');
   if (!el) return;
   el.innerHTML = guarantees.map((g) => `<span class="trust-bar__item">${g}</span>`).join('');
+}
+
+function initSectors() {
+  const el = document.getElementById('sectors-strip');
+  if (!el || !sectors.length) return;
+  el.innerHTML = `
+    <p class="sectors-strip__lead">On accompagne surtout</p>
+    <ul class="sectors-strip__list">
+      ${sectors.map((s) => `<li>${s}</li>`).join('')}
+    </ul>`;
 }
 
 function initPromo() {
@@ -788,103 +915,132 @@ function initPricing() {
       .join('');
   }
 
-  const identityEl = document.getElementById('pricing-identity');
-  if (identityEl && pricing.identity) {
+  const detailsRoot = document.getElementById('pricing-details');
+  if (detailsRoot && pricing.identity) {
     const id = pricing.identity;
-    identityEl.innerHTML = `
-      <div class="pricing-block__head">
-        <p class="pricing-block__eyebrow">Prestation séparée</p>
-        <h3 class="pricing-block__title">${id.label}</h3>
-        <p class="pricing-block__sub">${id.subtitle}</p>
-      </div>
-      <p class="price-card__range pricing-block__range">${id.range}</p>
-      <p class="price-card__devis">${id.rangeNote}</p>
-      <p class="pricing-block__text">${id.description}</p>
-      <ul class="pricing-identity-list">
-        ${id.items.map((item) => `<li><span>${item.label}</span><em>${item.range}</em></li>`).join('')}
-      </ul>
-      <p class="pricing-block__meta">${id.contact}</p>`;
-  }
-
-  const anchorsEl = document.getElementById('pricing-anchors');
-  if (anchorsEl && pricing.vitrineAnchors) {
     const a = pricing.vitrineAnchors;
-    anchorsEl.innerHTML = `
-      <div class="pricing-block__head">
-        <h3 class="pricing-block__title">${a.title}</h3>
+    const hosting = pricing.hostingIntro;
+
+    detailsRoot.innerHTML = `
+      <details class="pricing-fold">
+        <summary>
+          Identité visuelle
+          <span class="pricing-fold__hint">option · ${id.range}</span>
+        </summary>
+        <div class="pricing-fold__body" id="pricing-identity"></div>
+      </details>
+      <details class="pricing-fold">
+        <summary>
+          ${a.title}
+          <span class="pricing-fold__hint">fourchettes indicatives</span>
+        </summary>
+        <div class="pricing-fold__body" id="pricing-anchors"></div>
+      </details>
+      <details class="pricing-fold">
+        <summary>
+          ${pricing.examples.title}
+        </summary>
+        <div class="pricing-fold__body" id="pricing-examples"></div>
+      </details>
+      <details class="pricing-fold">
+        <summary>
+          ${hosting.title}
+        </summary>
+        <div class="pricing-fold__body pricing-fold__body--hosting">
+          <div id="pricing-hosting-intro"></div>
+          <div class="grid grid--pricing-hosting" id="pricing-hosting"></div>
+        </div>
+      </details>
+      <details class="pricing-fold">
+        <summary>
+          ${pricing.whyUs.title}
+        </summary>
+        <div class="pricing-fold__body" id="pricing-why"></div>
+      </details>`;
+
+    const identityEl = document.getElementById('pricing-identity');
+    if (identityEl) {
+      identityEl.innerHTML = `
+        <p class="pricing-block__sub">${id.subtitle}</p>
+        <p class="price-card__range pricing-block__range">${id.range}</p>
+        <p class="price-card__devis">${id.rangeNote}</p>
+        <p class="pricing-block__text">${id.description}</p>
+        <ul class="pricing-identity-list">
+          ${id.items.map((item) => `<li><span>${item.label}</span><em>${item.range}</em></li>`).join('')}
+        </ul>
+        <p class="pricing-block__meta">${id.contact}</p>`;
+    }
+
+    const anchorsEl = document.getElementById('pricing-anchors');
+    if (anchorsEl && a) {
+      anchorsEl.innerHTML = `
         ${a.hint ? `<p class="pricing-block__sub">${a.hint}</p>` : ''}
-      </div>
-      <div class="pricing-anchors-wrap">
-        <table class="pricing-anchors">
-          <thead>
-            <tr><th>Profil</th><th>Contenu type</th><th>Indication</th></tr>
-          </thead>
-          <tbody>
-            ${a.rows.map((r) => `<tr><th scope="row">${r.profile}</th><td>${r.content}</td><td>${r.range}</td></tr>`).join('')}
-          </tbody>
-        </table>
-      </div>`;
-  }
+        <div class="pricing-anchors-wrap">
+          <table class="pricing-anchors">
+            <thead>
+              <tr><th>Profil</th><th>Contenu type</th><th>Indication</th></tr>
+            </thead>
+            <tbody>
+              ${a.rows.map((r) => `<tr><th scope="row">${r.profile}</th><td>${r.content}</td><td>${r.range}</td></tr>`).join('')}
+            </tbody>
+          </table>
+        </div>`;
+    }
 
-  const examplesEl = document.getElementById('pricing-examples');
-  if (examplesEl && pricing.examples) {
-    examplesEl.innerHTML = `
-      <div class="pricing-block__head">
-        <h3 class="pricing-block__title">${pricing.examples.title}</h3>
-      </div>
-      <ul class="pricing-examples-list">
-        ${pricing.examples.items
-          .map(
-            (e) => `
-          <li>
-            <strong>${e.name}</strong>
-            <span>${e.type}</span>
-            <em>${e.range}</em>
-          </li>`,
-          )
-          .join('')}
-      </ul>`;
-  }
+    const examplesEl = document.getElementById('pricing-examples');
+    if (examplesEl && pricing.examples) {
+      examplesEl.innerHTML = `
+        <ul class="pricing-examples-list">
+          ${pricing.examples.items
+            .map(
+              (e) => `
+            <li>
+              <strong>${e.name}</strong>
+              <span>${e.type}</span>
+              <em>${e.range}</em>
+            </li>`,
+            )
+            .join('')}
+        </ul>`;
+    }
 
-  const whyEl = document.getElementById('pricing-why');
-  if (whyEl && pricing.whyUs) {
-    whyEl.innerHTML = `
-      <h3 class="pricing-block__title">${pricing.whyUs.title}</h3>
-      <div class="pricing-pillars__grid">
-        ${pricing.whyUs.points
-          .map(
-            (p) => `
-          <article class="pricing-pillar">
-            <h4>${p.title}</h4>
-            <p>${p.text}</p>
-          </article>`,
-          )
-          .join('')}
-      </div>`;
-  }
+    const whyEl = document.getElementById('pricing-why');
+    if (whyEl && pricing.whyUs) {
+      whyEl.innerHTML = `
+        <div class="pricing-pillars__grid">
+          ${pricing.whyUs.points
+            .map(
+              (p) => `
+            <article class="pricing-pillar">
+              <h4>${p.title}</h4>
+              <p>${p.text}</p>
+            </article>`,
+            )
+            .join('')}
+        </div>`;
+    }
 
-  const hostingIntroEl = document.getElementById('pricing-hosting-intro');
-  if (hostingIntroEl && pricing.hostingIntro) {
-    hostingIntroEl.innerHTML = `
-      <h3 class="pricing-block__title">${pricing.hostingIntro.title}</h3>
-      <p class="pricing-block__text">${pricing.hostingIntro.text}</p>`;
-  }
+    const hostingIntroEl = document.getElementById('pricing-hosting-intro');
+    if (hostingIntroEl && hosting) {
+      hostingIntroEl.innerHTML = `<p class="pricing-block__text">${hosting.text}</p>`;
+    }
 
-  const hostingEl = document.getElementById('pricing-hosting');
-  if (hostingEl && pricing.hosting) {
-    hostingEl.innerHTML = pricing.hosting
-      .map(
-        (h) => `
-      <article class="price-card price-card--hosting${h.highlight ? ' price-card--highlight' : ''}">
-        <h3>${h.label}</h3>
-        <p class="price-card__range">${h.price}</p>
-        ${h.priceNote ? `<p class="price-card__devis">${h.priceNote}</p>` : ''}
-        <p class="price-card__desc">${h.forWho}</p>
-        <ul>${h.features.map((f) => `<li>${f}</li>`).join('')}</ul>
-        ${h.note ? `<p class="price-card__note">${h.note}</p>` : ''}
-      </article>`,
-      )
-      .join('');
+    const hostingEl = document.getElementById('pricing-hosting');
+    if (hostingEl && pricing.hosting) {
+      hostingEl.innerHTML = pricing.hosting
+        .map(
+          (h) => `
+        <article class="price-card price-card--hosting${h.highlight ? ' price-card--highlight' : ''}">
+          <h3>${h.label}</h3>
+          <p class="price-card__range">${h.price}</p>
+          ${h.priceNote ? `<p class="price-card__devis">${h.priceNote}</p>` : ''}
+          <p class="price-card__desc">${h.forWho}</p>
+          <ul>${h.features.map((f) => `<li>${f}</li>`).join('')}</ul>
+          ${h.note ? `<p class="price-card__note">${h.note}</p>` : ''}
+        </article>`,
+        )
+        .join('');
+    }
   }
 
   const footnotes = document.getElementById('pricing-footnotes');
@@ -914,36 +1070,6 @@ function teamInitials(name) {
     .join('')
     .slice(0, 2)
     .toUpperCase();
-}
-
-function initAbout() {
-  setText('[data-about]', 'about', about);
-  const blurb = document.getElementById('team-blurb');
-  if (blurb && about.blurb) blurb.textContent = about.blurb;
-
-  const grid = document.getElementById('team-grid');
-  if (!grid) return;
-
-  grid.innerHTML = team
-    .map(
-      (member, i) => `
-    <article class="team-card reveal${i > 0 ? ` reveal--d${Math.min(i, 4)}` : ''}">
-      <div class="team-card__photo${member.photo ? '' : ' team-card__photo--fallback'}">
-        ${
-          member.photo
-            ? `<img src="${resolveAsset(member.photo)}" alt="${member.name}" width="112" height="112" loading="lazy" decoding="async" onerror="this.remove(); this.parentElement.classList.add('team-card__photo--fallback')" />`
-            : ''
-        }
-        <span class="team-card__initials" aria-hidden="true">${teamInitials(member.name)}</span>
-      </div>
-      <div class="team-card__body">
-        <h3 class="team-card__name">${member.name}</h3>
-        <p class="team-card__role">${member.role}</p>
-        ${member.bio ? `<p class="team-card__bio">${member.bio}</p>` : ''}
-      </div>
-    </article>`,
-    )
-    .join('');
 }
 
 function initFooter() {
@@ -1005,15 +1131,15 @@ initHero();
 initNav();
 initMarquee();
 initTrustBar();
+initSectors();
 initServices();
 initServiceSpotlight();
 initProjects();
 initTestimonials();
-initProcess();
+initCrew();
 initComparison();
 initPricing();
 initPromo();
-initAbout();
 initFaq();
 initFooter();
 initScrollReveal();

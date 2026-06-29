@@ -205,7 +205,7 @@ export const slides = [
     bullets: [
       'Prototype en 2–3 jours · Livraison en 1 à 2 semaines',
       'Mobile, Google & formulaires simples',
-      'Un interlocuteur par étape, sans jargon',
+      'Trois expertises complémentaires, sans jargon',
     ],
   },
   { type: 'team', duration: 5 },

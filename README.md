@@ -94,8 +94,9 @@ Tout le contenu marketing est dans **`config.js`** :
 
 ## Formulaire contact
 
-1. **Recommandé** : clé gratuite [Web3Forms](https://web3forms.com) → `form.web3formsAccessKey` dans `config.js`
-2. **Secours** : FormSubmit (`form.formsubmitEmail`) — activer une fois via l'e-mail de confirmation au premier envoi
+**En production : FormSubmit** (`form.formsubmitEmail` dans `config.js`). Au premier envoi, confirmer l'adresse via l'e-mail reçu de FormSubmit.
+
+Optionnel : clé [Web3Forms](https://web3forms.com) dans `form.web3formsAccessKey` — si renseignée, elle remplace FormSubmit automatiquement.
 
 ## Déploiement
 

@@ -60,12 +60,13 @@ export const guarantees = [
 ];
 
 export const contact = {
-  name: 'Hugo',
+  name: 'Audrey',
   email: 'bulletonsite@gmail.com',
   phone: '06 13 80 95 65',
   phoneTel: '+33613809565',
   zone: 'Partout en France · 100 % à distance',
-  response: 'Réponse sous 48 h',
+  response: 'Audrey vous recontacte sous 48 h',
+  formSub: 'Brief gratuit · Sans engagement · un seul interlocuteur pour vous',
   photo: 'assets/hugo-portrait.png',
 };
 
@@ -75,6 +76,38 @@ export const form = {
   web3formsAccessKey: '',
   /** Si Web3Forms est vide : activer une fois FormSubmit via le lien reçu par e-mail. */
   formsubmitEmail: 'bulletonsite@gmail.com',
+  submitLabel: 'Envoyer ma demande de devis',
+  sendingLabel: 'Envoi en cours…',
+  successMessage:
+    'Message envoyé. Audrey vous répond sous 48 h avec un devis gratuit. Pensez à vérifier vos spams.',
+  needs: [
+    { value: '', label: 'Choisir…', placeholder: true },
+    { value: 'Site vitrine sur mesure', label: 'Site vitrine sur mesure' },
+    { value: 'Site dynamique & catalogue', label: 'Site dynamique & catalogue' },
+    { value: 'Application web & outil métier', label: 'Application web & outil métier' },
+    { value: 'Identité visuelle (logo, charte)', label: 'Identité visuelle (logo, charte)' },
+    { value: 'Site + identité visuelle', label: 'Site + identité visuelle' },
+    { value: 'Je ne sais pas encore', label: 'Je ne sais pas encore — conseillez-moi' },
+  ],
+  budgets: [
+    { value: 'Non précisé', label: 'Budget : non précisé' },
+    { value: 'Site vitrine (500 – 1 500 €)', label: 'Site vitrine (500 – 1 500 €)' },
+    { value: 'Site dynamique (2 000 – 3 500 €)', label: 'Site dynamique (2 000 – 3 500 €)' },
+    { value: 'Outil métier (4 000 €+)', label: 'Outil métier (4 000 €+)' },
+    { value: 'Identité visuelle (250 – 800 €)', label: 'Identité visuelle (250 – 800 €)' },
+    { value: 'Harmonisation logo (160 – 250 €)', label: 'Harmonisation logo (160 – 250 €)' },
+  ],
+  hosting: [
+    { value: 'Pas encore décidé', label: 'Après mise en ligne : pas encore décidé' },
+    { value: 'Autonomie totale', label: 'Autonomie totale (pas d\'abonnement chez nous)' },
+    { value: 'Pack tranquillité', label: 'Pack tranquillité (30 – 50 €/mois)' },
+  ],
+  timelines: [
+    { value: 'Non précisé', label: 'Délai souhaité : non précisé' },
+    { value: 'Dans le mois', label: 'Dans le mois' },
+    { value: '1 – 3 mois', label: 'Dans 1 – 3 mois' },
+    { value: 'Plus tard / pas pressé', label: 'Plus tard / pas pressé' },
+  ],
 };
 
 /** Statistiques Plausible (bulletonsite.com) — mesure d'audience respectueuse, sans cookies publicitaires. */
@@ -85,9 +118,9 @@ export const analytics = {
 };
 
 export const nav = [
-  { id: 'services', label: 'Services' },
   { id: 'projets', label: 'Réalisations' },
-  { id: 'process', label: 'Méthode' },
+  { id: 'services', label: 'Services' },
+  { id: 'process', label: 'Méthode & équipe' },
   { id: 'tarifs', label: 'Tarifs' },
   { id: 'faq', label: 'FAQ' },
   { id: 'contact', label: 'Contact' },
@@ -98,7 +131,7 @@ export const hero = {
   title: 'Votre site internet,',
   titleEm: 'conçu en équipe.',
   lead:
-    'Communication, création d\'identité visuelle et développement réunis : vitrines, réservations, outils métier. Nous créons ce dont vous avez besoin. Un interlocuteur par métier, du brief au prototype en quelques jours.',
+    'Communication, création d\'identité visuelle et développement réunis : vitrines, réservations, outils métier. Nous créons ce dont vous avez besoin. Un seul point de contact, une équipe complète derrière, du brief au prototype en quelques jours.',
   chips: ['Équipe dédiée', 'Prototype en 2–3 jours', 'Mobile & Google'],
   ctaPrimary: 'Demander un devis gratuit',
   ctaSecondary: 'Voir nos réalisations',
@@ -125,7 +158,7 @@ export const services = [
   {
     label: 'Équipe',
     title: 'Trois métiers complémentaires',
-    text: 'Audrey écoute votre besoin, Niyazi conçoit l\'identité, Hugo développe et met en ligne. Un interlocuteur clair à chaque étape.',
+    text: 'Audrey écoute votre besoin, Niyazi conçoit l\'identité, Hugo développe et met en ligne. Trois expertises, un seul fil de discussion.',
   },
   {
     label: 'Sur mesure',
@@ -236,7 +269,7 @@ export const testimonials = [
 
 export const process = {
   title: 'Simple, rapide, sans surprise',
-  subtitle: 'Du premier échange à la mise en ligne : trois étapes, trois interlocuteurs.',
+  subtitle: 'Du premier échange à la mise en ligne : trois étapes, une équipe aux rôles bien définis.',
   steps: [
     {
       num: '01',
@@ -452,11 +485,15 @@ export const comparison = {
 export const faq = [
   {
     q: 'Les prix affichés sur le site sont-ils définitifs ?',
-    a: 'Non. Les montants et fourchettes servent de repères pour vous orienter. Avant tout engagement, nous établissons un devis gratuit, détaillé et adapté à votre projet : c\'est lui qui fait foi. Rien n\'est facturé sans votre accord sur ce devis.',
+    a: 'Non. Les montants et fourchettes servent de repères pour vous orienter. Nous vous répondons sous 48 h avec un devis gratuit, détaillé et adapté à votre projet : c\'est lui qui fait foi. Rien n\'est facturé sans votre accord sur ce devis.',
+  },
+  {
+    q: 'Qui accompagne mon projet au quotidien ?',
+    a: 'Audrey est votre point de contact : brief, suivi et retours. Niyazi conçoit l\'identité visuelle, Hugo développe et met en ligne. Vous avez un seul fil de discussion avec nous, même si plusieurs expertises interviennent sur le projet.',
   },
   {
     q: 'L\'identité visuelle est-elle incluse dans le site vitrine ?',
-    a: 'Non par défaut. Vous pouvez arriver avec votre logo, commander une création à part (250 – 800 € selon le scope), ou combiner site et identité sur un seul devis. L\'harmonisation d\'un logo fourni peut être intégrée au projet web sans refaire une charte complète.',
+    a: 'Non par défaut. Vous pouvez arriver avec votre logo, commander une création à part (250 – 800 € selon le scope), ou combiner site et identité sur un seul devis. L\'harmonisation d\'un logo fourni est facturée à part (environ 160 – 250 €) ou intégrée au devis web sans refaire une charte complète.',
   },
   {
     q: 'Ai-je besoin d\'un site dynamique pour mettre à jour mon site ?',
@@ -468,11 +505,11 @@ export const faq = [
   },
   {
     q: 'Comment modifier mon site après la livraison ?',
-    a: 'Deux options : l\'autonomie totale (hébergement à votre nom, modifications sur devis ponctuel) ou le pack tranquillité (30 – 50 €/mois, modifications texte/photo incluses selon formule).',
+    a: 'Deux options : l\'autonomie totale (hébergement et domaine à votre nom, ~50 – 80 €/an chez le fournisseur, sans abonnement mensuel chez Bulle ton site ; modifications ensuite sur devis ponctuel) ou le pack tranquillité (30 – 50 €/mois, petites mises à jour texte/photo incluses selon formule).',
   },
   {
     q: 'Que comprend le pack tranquillité ?',
-    a: 'À partir d\'environ 30 €/mois : hébergement professionnel, HTTPS, sauvegardes, surveillance et gestion du nom de domaine. Vers 50 €/mois : en plus, jusqu\'à 30–45 minutes de modifications texte ou photo par mois sur simple message. Le détail est confirmé sur devis.',
+    a: 'Formule Sérénité (~30 €/mois) : hébergement professionnel, HTTPS, sauvegardes, surveillance et gestion du nom de domaine. Formule Actif (~50 €/mois) : tout Sérénité + jusqu\'à 30–45 minutes de modifications texte ou photo par mois sur simple message. Une nouvelle page ou fonctionnalité fait l\'objet d\'un devis séparé. Le détail est confirmé sur devis.',
   },
   {
     q: 'Le nom de domaine est-il inclus ?',
@@ -488,7 +525,7 @@ export const faq = [
   },
   {
     q: 'Comment se passe le paiement ?',
-    a: '30 % à la commande, 70 % à la mise en ligne. Devis gratuit et sans engagement avant toute décision.',
+    a: '30 % à la commande, 70 % à la mise en ligne. Devis gratuit sous 48 h, sans engagement avant toute décision.',
   },
 ];
 
@@ -530,11 +567,13 @@ export const team = [
 export const about = {
   title: "L'équipe",
   text: 'Audrey (communication), Niyazi (identité visuelle) et Hugo (développement) : trois métiers complémentaires pour un site cohérent de A\u00a0à\u00a0Z.',
-  blurb: 'Pas de sous-traitance opaque : un interlocuteur par étape, vous savez qui fait quoi.',
+  blurb: 'Pas de sous-traitance opaque : vous savez qui fait quoi, à chaque étape du projet.',
 };
 
 export const legal = {
   mentionsUrl: 'mentions-legales.html',
   privacyNote:
-    'Les données du formulaire servent uniquement à répondre à votre demande. Elles ne sont pas revendues ni utilisées à d\'autres fins.',
+    'Vos données sont transmises via FormSubmit (service tiers) uniquement pour nous permettre de vous répondre. Conservation limitée au suivi de votre demande.',
+  consentLabel:
+    'J\'accepte que mes données soient traitées pour répondre à ma demande de contact, conformément aux mentions légales.',
 };
