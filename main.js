@@ -91,7 +91,8 @@ function initSeo() {
           areaServed: 'FR',
           parentOrganization: {
             '@type': 'Organization',
-            name: organization.legalName || organization.parent,
+            name: organization.commercialName,
+            legalName: organization.legalName,
           },
         },
         {
@@ -1082,7 +1083,7 @@ function initFooter() {
   }
 
   const copyNameEl = document.getElementById('footer-copy-name');
-  if (copyNameEl) copyNameEl.textContent = organization.parent;
+  if (copyNameEl) copyNameEl.textContent = organization.footerLine || organization.brand;
 }
 
 function initScrollReveal() {

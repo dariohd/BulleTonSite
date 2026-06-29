@@ -536,10 +536,12 @@ export const promo = {
 };
 
 export const organization = {
-  parent: 'DHD',
   brand: 'Bulle ton site',
   footerLine: 'Bulle ton site',
-  legalName: 'DHD',
+  /** Entité légale (mentions légales, schema.org) */
+  legalName: 'Hugo Davion',
+  /** Nom commercial (mentions légales uniquement) */
+  commercialName: 'DARIOH DEV',
   legalContact: 'Hugo Davion',
 };
 
