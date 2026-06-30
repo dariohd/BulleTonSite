@@ -4,6 +4,7 @@ import {
   nav,
   hero,
   sectors,
+  sectorsLead,
   servicesIntro,
   services,
   projects,
@@ -811,7 +812,7 @@ function initSectors() {
   const el = document.getElementById('sectors-strip');
   if (!el || !sectors.length) return;
   el.innerHTML = `
-    <p class="sectors-strip__lead">On accompagne surtout</p>
+    <p class="sectors-strip__lead">${sectorsLead}</p>
     <ul class="sectors-strip__list">
       ${sectors.map((s) => `<li>${s}</li>`).join('')}
     </ul>`;

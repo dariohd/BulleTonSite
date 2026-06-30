@@ -2,7 +2,7 @@
 
 ![bulletonsite.com](docs/screenshot.png)
 
-Site commercial one-page pour **Bulle ton site** — création de sites web pour artisans, tourisme et commerces locaux.
+Site commercial one-page pour **Bulle ton site** — création de sites web et outils sur mesure pour indépendants, PME, associations et commerces.
 
 | | |
 |---|---|

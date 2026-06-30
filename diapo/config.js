@@ -72,11 +72,13 @@ export const sectorsZone = {
   titleEm: 'Partout en France',
   sectorItems: [
     'Artisans & bâtiment',
-    'Chambres d\'hôtes & gîtes',
-    'Commerçants & restaurateurs',
+    'Tourisme · gîtes & chambres d\'hôtes',
+    'Commerces & restauration',
     'Professions libérales',
+    'PME & services B2B',
+    'Associations & projets locaux',
   ],
-  zoneLead: 'Visio, partage d\'écran et suivi jusqu\'à la mise en ligne.',
+  zoneLead: 'Indépendants, PME, associations, commerces — visio, partage d\'écran et suivi jusqu\'à la mise en ligne.',
 };
 
 export const processDelivery = {
@@ -192,7 +194,7 @@ export const slides = [
     line1: 'Votre site internet,',
     line2: 'conçu en équipe.',
     sub: 'Communication, identité visuelle & mise en ligne · devis gratuit sous 48 h.',
-    caption: 'Artisans · Gîtes · Commerces · Outils sur mesure',
+    caption: 'Vitrines · PME · Associations · Outils sur mesure',
   },
   {
     type: 'intro',

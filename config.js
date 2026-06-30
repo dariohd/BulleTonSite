@@ -41,13 +41,13 @@ export const brand = {
   byline: 'Création de sites web',
   tagline: 'Sites internet sur mesure',
   description:
-    'Bulle ton site, création de sites web sur mesure pour artisans, gîtes et commerces. Vitrines, outils métier, réservations. Devis gratuit sous 48 h.',
+    'Bulle ton site — sites vitrines, outils métier et identité visuelle sur mesure pour indépendants, PME, associations et commerces. Devis gratuit sous 48 h.',
 };
 
 export const seo = {
   title: 'Bulle ton site · Création de sites web sur mesure',
   description:
-    'Sites web et outils sur mesure : communication, identité visuelle et création sur mesure. Artisans, gîtes, commerces. Vitrine dès 500 € · devis gratuit sous 48 h.',
+    'Sites web et outils sur mesure : communication, identité visuelle et création sur mesure. Indépendants, PME, associations, commerces. Vitrine dès 500 € · devis gratuit sous 48 h.',
   ogImage: 'assets/og-bubble.svg',
 };
 
@@ -129,7 +129,7 @@ export const hero = {
   title: 'Votre site internet,',
   titleEm: 'conçu en équipe.',
   lead:
-    'Communication, identité visuelle et mise en ligne réunies : vitrines, réservations, outils sur mesure. Une équipe complète, un seul interlocuteur — de la première discussion à la maquette en quelques jours.',
+    'Communication, identité visuelle et mise en ligne réunies : vitrines, réservations, outils sur mesure. Indépendants, PME, associations et commerces — un seul interlocuteur, partout en France.',
   chips: ['Équipe dédiée', 'Maquette en 2–3 jours', 'Téléphone & Google'],
   ctaPrimary: 'Demander un devis gratuit',
   ctaSecondary: 'Voir nos réalisations',
@@ -141,11 +141,15 @@ export const hero = {
   ],
 };
 
+export const sectorsLead = 'Exemples de secteurs accompagnés';
+
 export const sectors = [
   'Artisans & bâtiment',
-  'Chambres d\'hôtes & gîtes',
-  'Commerçants & restaurateurs',
+  'Tourisme · gîtes & chambres d\'hôtes',
+  'Commerces & restauration',
   'Professions libérales',
+  'PME & services B2B',
+  'Associations & projets locaux',
 ];
 
 export const servicesIntro = {
@@ -495,7 +499,7 @@ export const faq = [
   },
   {
     q: 'Ai-je besoin d\'un site que je peux modifier moi-même ?',
-    a: 'Pas forcément. Pour beaucoup d\'artisans et de gîtes, une vitrine suffit : vous nous envoyez vos changements (pack tranquillité ou devis ponctuel). Un site modifiable par vous est utile si vous publiez souvent (actualités, galerie, catalogue) sans passer par nous.',
+    a: 'Pas forcément. Pour beaucoup de vitrines, vous nous envoyez vos changements (pack tranquillité ou devis ponctuel). Un site modifiable par vous est utile si vous publiez souvent (actualités, galerie, catalogue) sans passer par nous.',
   },
   {
     q: 'Combien de temps pour avoir mon site ?',
@@ -515,7 +519,7 @@ export const faq = [
   },
   {
     q: 'Travaillez-vous avec mon métier ?',
-    a: 'Oui : artisans, chambres d\'hôtes, commerces, restaurateurs, professions libérales… Si vous avez un besoin particulier (outil interne, réservations en ligne), décrivez-le : on vous dit franchement si on peut vous accompagner.',
+    a: 'Oui. Les secteurs listés sur le site (artisans, tourisme, commerces, professions libérales…) sont des exemples, pas une liste fermée. Nous accompagnons aussi des PME, associations, indépendants et porteurs de projet avec une vitrine ou un outil sur mesure (réservations, catalogue, formulaire, outil interne…). Décrivez votre activité : on vous dit franchement si on peut vous accompagner.',
   },
   {
     q: 'Travaillez-vous à distance ?',
